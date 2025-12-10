@@ -11,11 +11,38 @@ import TechStrip from './components/sections/TechStrip';
 import Testimonials from './components/sections/Testimonials';
 import Work from './components/sections/Work';
 
-const App: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+import { Route, Routes } from 'react-router-dom';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
+const MainLayout: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const openBooking = () => setIsModalOpen(true);
 
+  return (
+    <>
+      <Navbar onOpenBooking={openBooking} />
+      <main>
+        <Hero onOpenBooking={openBooking} />
+        <TechStrip />
+        <BentoGrid />
+        <Philosophy onOpenBooking={openBooking} />
+        <Work />
+        <Testimonials />
+        {/* Call To Action Section - Enhanced with Hero-style visuals */}
+        <CTA onOpenBooking={openBooking} />
+      </main>
+      <Footer onOpenBooking={openBooking} />
+      <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
+  );
+};
+
+import ScrollToTop from './components/ScrollToTop';
+
+// ...
+
+const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#0B0E14] text-white selection:bg-blue-500/30 font-sans">
       <Helmet>
@@ -25,21 +52,14 @@ const App: React.FC = () => {
           content="We build revenue-generating digital assets. Full-stack web development, AI integration, and rapid MVP delivery."
         />
       </Helmet>
-      <Navbar onOpenBooking={openBooking} />
-      <main>
-        <Hero onOpenBooking={openBooking} />
-        <TechStrip />
-        <BentoGrid />
-        <Philosophy onOpenBooking={openBooking} />
-        <Work />
-        <Testimonials />
 
-        {/* Call To Action Section - Enhanced with Hero-style visuals */}
-        <CTA onOpenBooking={openBooking} />
-      </main>
-      <Footer onOpenBooking={openBooking} />
+      <ScrollToTop />
 
-      <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Routes>
+        <Route path="/" element={<MainLayout />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
+      </Routes>
     </div>
   );
 };

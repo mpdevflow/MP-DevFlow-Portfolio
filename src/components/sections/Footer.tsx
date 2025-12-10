@@ -1,7 +1,8 @@
-import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/constants';
+import { CONTACT_EMAIL } from '@/constants';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -23,32 +24,6 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               Building the future of digital products from the Philippines to the world. Quality
               code, transparent process.
             </p>
-            <div className="flex gap-4">
-              <a
-                href={SOCIAL_LINKS.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-white/5 rounded-full hover:bg-blue-600 hover:text-white text-slate-400 transition-all"
-              >
-                <Twitter size={20} />
-              </a>
-              <a
-                href={SOCIAL_LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-white/5 rounded-full hover:bg-blue-600 hover:text-white text-slate-400 transition-all"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href={SOCIAL_LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-white/5 rounded-full hover:bg-blue-600 hover:text-white text-slate-400 transition-all"
-              >
-                <Linkedin size={20} />
-              </a>
-            </div>
           </div>
 
           <div>
@@ -121,12 +96,12 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
           <p>&copy; {new Date().getFullYear()} MP DevFlow. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </Link>
+            <Link to="/terms" className="hover:text-white transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
