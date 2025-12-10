@@ -51,6 +51,10 @@ const App: React.FC = () => {
           name="description"
           content="We build revenue-generating digital assets. Full-stack web development, AI integration, and rapid MVP delivery."
         />
+        <meta property="og:image" content="/seo-image.png" />
+        <meta property="og:url" content="https://mpdevflow.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="/seo-image.png" />
       </Helmet>
 
       <ScrollToTop />
