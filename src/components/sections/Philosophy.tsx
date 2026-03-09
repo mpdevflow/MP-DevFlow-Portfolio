@@ -134,7 +134,7 @@ const Philosophy: React.FC<PhilosophyProps> = ({ onOpenBooking }) => {
               onClick={onOpenBooking}
               className="inline-block px-8 py-4 bg-white text-blue-900 hover:bg-slate-200 font-bold rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 cursor-pointer"
             >
-              Start Your Project
+              Book a Discovery Call
             </button>
           </div>
         </div>

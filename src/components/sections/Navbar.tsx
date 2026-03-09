@@ -121,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             }}
             className="bg-blue-600 text-white font-semibold py-3 rounded-xl w-full block mt-2"
           >
-            Start Project
+            Book a Discovery Call
           </button>
         </div>
       )}

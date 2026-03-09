@@ -4,11 +4,14 @@ export const PROJECTS: Project[] = [
   {
     title: 'GameLobbyPH',
     category: 'Gaming Startup',
+    isStudioProject: false,
     description:
-      'Revenue optimization and real-time infrastructure for a high-growth gaming startup. Fixed critical data accuracy issues and stabilized gameplay.',
-    tech: ['React', 'Vite', 'Supabase', 'WebSockets'],
+      'Revenue optimization and real-time infrastructure for a high-growth gaming startup. Built a full bracket-style tournament system with automated prize distribution, dispute resolution, and real-time match lifecycle management.',
+    tech: ['React', 'Vite', 'Supabase', 'PostgreSQL'],
     color: 'bg-indigo-600',
-    link: 'https://www.gamelobbyph.com/',
+    accentColor: 'from-blue-900 to-indigo-900',
+    image: '/images/gamelobbyph-preview.png',
+    link: '/case-studies/gamelobbyph',
     context:
       'GameLobbyPH is a 6-month-old startup rapidly gaining traction in the competitive gaming space. To sustain their growth, they needed to move from an MVP infrastructure to a robust, revenue-ready platform.',
     challenge:
@@ -21,10 +24,13 @@ export const PROJECTS: Project[] = [
   {
     title: 'ClientEcho',
     category: 'AI SaaS Product',
+    isStudioProject: true,
     description:
-      "A 'Vibe Coding' experiment that graduated to a full product. AI-powered testimonial generator for e-commerce and professionals.",
-    tech: ['React', 'Vite', 'OpenAI', 'Supabase', 'Tailwind'],
+      'An in-house AI-powered testimonial generator for e-commerce and professionals. Built from concept to deployment using AI-augmented workflows.',
+    tech: ['React', 'Vite', 'OpenAI', 'Supabase'],
     color: 'bg-teal-500',
+    accentColor: 'from-teal-900 to-emerald-900',
+    image: '/images/clientecho-preview.png',
     link: 'https://useclientecho.com/',
     context:
       "Like BreakBuddy, ClientEcho began as a rapid 'vibe coding' experiment to solve a specific pain point (writer's block). But unlike a prototype, we pushed it all the way to production to prove that AI-generated software is commercially viable.",
@@ -38,10 +44,13 @@ export const PROJECTS: Project[] = [
   {
     title: 'BreakBuddy',
     category: 'Internal R&D',
+    isStudioProject: true,
     description:
-      'A rapid-prototype focus timer built to benchmark our AI-augmented workflow. Goes from concept to deployment in record time.',
-    tech: ['React', 'Vite', 'Tailwind', 'Recharts'],
+      'A rapid-prototype focus timer demonstrating our AI-augmented build workflow. Concept to deployment in under a week.',
+    tech: ['React', 'Vite', 'Tailwind', 'TypeScript'],
     color: 'bg-rose-500',
+    accentColor: 'from-rose-900 to-pink-900',
+    image: '/images/breakbuddy-preview.png',
     link: 'https://breakbuddy-ten.vercel.app/',
     context:
       "We preach speed, so we practice it. BreakBuddy was built internally to solve our own team's burnout issues, but primarily to stress-test our 'Vibe Coding' methodology.",
