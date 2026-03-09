@@ -170,8 +170,8 @@ const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
         {/* Sub-headline */}
         <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          The Philippines’ leading product-minded dev agency. Fast execution, honest direction, and
-          AI-augmented workflows.
+          A boutique dev studio from the Philippines. Senior-level execution, product-minded
+          thinking, and AI-augmented speed — so you pay for results, not hours.
         </p>
 
         {/* Buttons */}
@@ -180,7 +180,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             onClick={onOpenBooking}
             className="group relative px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] hover:shadow-[0_0_60px_-15px_rgba(37,99,235,0.6)] flex items-center gap-2 cursor-pointer hover:-translate-y-1"
           >
-            Start Your Project
+            Book a Discovery Call
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
 
