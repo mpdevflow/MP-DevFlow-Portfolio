@@ -42,7 +42,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             onClick={onOpenBooking}
             className="w-fit rounded-full bg-[#191813] px-6 py-3 text-sm font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
           >
-            Start a Project
+            Book a Free Call
           </button>
         </div>
 

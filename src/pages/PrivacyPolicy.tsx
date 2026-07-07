@@ -1,10 +1,16 @@
 import LegalLayout from '@/components/layout/LegalLayout';
+import SEO from '@/components/SEO';
 import { Database, Eye, Lock, MessageSquare, Scale } from 'lucide-react';
 import React from 'react';
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <LegalLayout title="Privacy Policy">
+      <SEO
+        title="Privacy Policy - MPDevFlow"
+        description="Read the MPDevFlow privacy policy for how project inquiries, booking details, and communication data are handled."
+        path="/privacy"
+      />
       <p className="mb-12 border-l-4 border-[#D9481F] pl-6 text-xl leading-8 text-[#55524A] italic">
         At MPDevFlow, we believe in <strong className="text-[#191813]">transparency</strong> and{' '}
         <strong className="text-[#191813]">honest direction</strong>. We treat your privacy with the

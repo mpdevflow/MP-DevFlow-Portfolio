@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { ArrowLeft, ArrowRight, CheckCircle, Clock, Code2, Star, Trophy, Zap } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -64,6 +65,12 @@ const GameLobbyPHCaseStudy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0E14] text-white">
+      <SEO
+        title="Case Study - MPDevFlow"
+        description="Explore an MPDevFlow case study covering project context, challenge, approach, outcome, and the product delivery decisions behind the work."
+        path="/case-studies/gamelobbyph"
+        type="article"
+      />
       {/* Back Link */}
       <div className="max-w-4xl mx-auto px-4 pt-8">
         <Link

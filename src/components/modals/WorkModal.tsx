@@ -12,6 +12,8 @@ const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
   if (!isOpen || !project) return null;
 
   const shouldShowProjectImage = project.hasPreviewImage && project.image;
+  const liveSiteUrl =
+    project.liveUrl ?? (project.link?.startsWith('http') ? project.link : undefined);
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -104,12 +106,12 @@ const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
         </div>
 
         <div className="flex shrink-0 flex-col gap-3 border-t border-[#DDDAD1] bg-[#EFEEE8] p-5 md:flex-row">
-          {project.link && (
+          {liveSiteUrl && (
             <a
-              href={project.link}
+              href={liveSiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 rounded-xl bg-[#191813] py-4 text-center font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
+              className="flex-1 rounded-xl border border-[#CFCBC0] bg-[#FAF9F5] py-4 text-center font-semibold text-[#191813] transition-colors hover:border-[#191813]"
             >
               <span className="inline-flex items-center justify-center gap-2">
                 Visit Live Site <ExternalLink size={18} />

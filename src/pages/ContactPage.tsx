@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import CTA from '@/components/sections/CTA';
 import { CONTACT_EMAIL } from '@/constants';
 import { ArrowRight, Mail } from 'lucide-react';
@@ -10,6 +11,11 @@ interface ContactPageProps {
 const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
   return (
     <>
+      <SEO
+        title="Contact - MPDevFlow"
+        description="Contact MPDevFlow to discuss landing pages, MVPs, SaaS apps, dashboards, internal tools, maintenance, or flexible build support."
+        path="/contact"
+      />
       <section className="border-b border-[#DDDAD1] px-4 pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div>
@@ -38,7 +44,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
                 onClick={onOpenBooking}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#191813] px-6 py-3 text-sm font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
               >
-                Open Project Brief
+                Book a Free Call
                 <ArrowRight size={17} />
               </button>
               <a

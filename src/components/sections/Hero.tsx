@@ -48,7 +48,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               onClick={onOpenBooking}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-[#191813] px-7 py-4 text-sm font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
             >
-              Start a Project
+              Book a Free Project Call
               <ArrowRight size={17} />
             </button>
             <a

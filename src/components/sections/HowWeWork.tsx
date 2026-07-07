@@ -16,7 +16,7 @@ const HowWeWork: React.FC<HowWeWorkProps> = ({ onOpenBooking }) => {
               (04) How we work
             </p>
             <h2 className="max-w-2xl text-3xl font-semibold leading-tight tracking-tight text-[#191813] md:text-5xl">
-              Senior-led delivery without heavy agency overhead.
+              Clear delivery without heavy agency overhead.
             </h2>
           </div>
           <p className="max-w-md leading-7 text-[#55524A]">
@@ -52,7 +52,7 @@ const HowWeWork: React.FC<HowWeWorkProps> = ({ onOpenBooking }) => {
             onClick={onOpenBooking}
             className="inline-flex items-center gap-2 rounded-full bg-[#191813] px-7 py-4 text-sm font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
           >
-            Send a Project Brief
+            Book a Free Project Call
             <ArrowRight size={17} />
           </button>
         </div>

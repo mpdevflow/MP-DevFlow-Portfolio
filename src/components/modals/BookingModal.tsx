@@ -105,10 +105,11 @@ ${data.message}`;
           <div className="mb-5 flex items-start justify-between gap-4">
             <div>
               <h3 className="text-2xl font-semibold tracking-tight text-[#191813]">
-                Start a Project
+                Free Project Call
               </h3>
               <p className="mt-1 text-sm leading-6 text-[#55524A]">
-                Share what you know. It is fine if budget, timing, or scope still need shaping.
+                Share rough notes or book a quick virtual coffee. It is fine if budget, timing, or
+                scope still need shaping.
               </p>
             </div>
             <button
@@ -141,7 +142,7 @@ ${data.message}`;
               }`}
             >
               <Calendar size={16} />
-              Book a Call
+              Free Call
             </button>
           </div>
         </div>

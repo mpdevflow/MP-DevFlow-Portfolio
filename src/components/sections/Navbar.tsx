@@ -71,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             onClick={onOpenBooking}
             className="inline-block bg-[#191813] hover:bg-[#D9481F] text-[#F5F4F0] text-xs font-semibold px-5 py-2.5 rounded-full transition-colors cursor-pointer"
           >
-            Start a Project
+            Free Project Call
           </button>
         </div>
 
@@ -103,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
             }}
             className="bg-[#191813] text-[#F5F4F0] font-semibold py-3 rounded-xl w-full block mt-2"
           >
-            Start a Project
+            Free Project Call
           </button>
         </div>
       )}

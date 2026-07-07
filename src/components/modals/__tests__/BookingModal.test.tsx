@@ -11,12 +11,12 @@ describe('BookingModal Validation', () => {
 
   it('renders correctly when open', () => {
     render(<BookingModal isOpen={true} onClose={mockClose} />);
-    expect(screen.getByText('Start a Project')).toBeInTheDocument();
+    expect(screen.getByText('Free Project Call')).toBeInTheDocument();
   });
 
   it('does not render when closed', () => {
     render(<BookingModal isOpen={false} onClose={mockClose} />);
-    expect(screen.queryByText('Start a Project')).not.toBeInTheDocument();
+    expect(screen.queryByText('Free Project Call')).not.toBeInTheDocument();
   });
 
   it('validates empty form submission', async () => {

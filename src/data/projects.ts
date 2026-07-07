@@ -12,7 +12,8 @@ export const PROJECTS: Project[] = [
     accentColor: 'from-blue-900 to-indigo-900',
     image: '/images/gamelobbyph-preview.png',
     hasPreviewImage: true,
-    link: '/case-studies/gamelobbyph',
+    caseStudyPath: '/case-studies/gamelobbyph',
+    liveUrl: 'https://gamelobbyph.com',
     context:
       'GameLobbyPH is a 6-month-old startup rapidly gaining traction in the competitive gaming space. To sustain their growth, they needed to move from an MVP infrastructure to a robust, revenue-ready platform.',
     challenge:
@@ -33,7 +34,8 @@ export const PROJECTS: Project[] = [
     accentColor: 'from-slate-950 to-pink-950',
     image: '/images/supra-data-preview.png',
     hasPreviewImage: true,
-    link: 'https://www.supra.com/data',
+    caseStudyPath: '/case-studies/supra-data',
+    liveUrl: 'https://www.supra.com/data',
     context:
       'Supra Data gives users a live view of crypto token prices, market caps, and short-term movements. The experience needs to feel current at a glance without making the interface jump, flicker, or distract users as data changes.',
     challenge:
@@ -55,7 +57,8 @@ export const PROJECTS: Project[] = [
     image: '/images/diwata-ai-logo.png',
     hasPreviewImage: true,
     previewImageFit: 'contain',
-    link: 'https://diwata-ai-web.vercel.app/',
+    caseStudyPath: '/case-studies/diwata-ai',
+    liveUrl: 'https://diwata-ai-web.vercel.app/',
     context:
       'Diwata AI is built for educators working in real classrooms where connectivity can be unreliable. The product brings AI-assisted lesson planning, quiz creation, student support, and teaching workflows into a mobile and web experience that can continue to be useful offline.',
     challenge:

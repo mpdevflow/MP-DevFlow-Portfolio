@@ -24,6 +24,8 @@ export interface Project {
   previewImageFit?: 'cover' | 'contain';
   isStudioProject?: boolean;
   link?: string;
+  liveUrl?: string;
+  caseStudyPath?: string;
   // detailed fields for modal
   context: string;
   challenge: string;

@@ -1,10 +1,16 @@
 import LegalLayout from '@/components/layout/LegalLayout';
+import SEO from '@/components/SEO';
 import { AlertTriangle, Files, Handshake, MessageCircle, Shield, Zap } from 'lucide-react';
 import React from 'react';
 
 const TermsOfService: React.FC = () => {
   return (
     <LegalLayout title="Terms of Service">
+      <SEO
+        title="Terms of Service - MPDevFlow"
+        description="Review the MPDevFlow terms of service for project partnerships, communication, delivery, intellectual property, and limitations of liability."
+        path="/terms"
+      />
       <p className="mb-12 border-l-4 border-[#D9481F] pl-6 text-xl leading-8 text-[#55524A] italic">
         MPDevFlow is not a typical code factory. We are a{' '}
         <strong className="text-[#191813]">product-building partner</strong>. Our terms reflect our

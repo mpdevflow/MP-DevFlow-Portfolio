@@ -9,7 +9,8 @@ const mockProject: Project = {
   description: 'Test Description',
   tech: ['React', 'TypeScript'],
   color: 'bg-blue-500',
-  link: 'https://example.com',
+  liveUrl: 'https://example.com',
+  caseStudyPath: '/case-studies/test-project',
   context: 'Test Context',
   challenge: 'Test Challenge',
   solution: 'Test Solution',
@@ -51,8 +52,13 @@ describe('WorkModal', () => {
     expect(link).toHaveAttribute('href', 'https://example.com');
   });
 
+  it('does not render "Read Case Study" while case-study buttons are hidden', () => {
+    render(<WorkModal isOpen={true} onClose={mockClose} project={mockProject} />);
+    expect(screen.queryByText('Read Case Study')).not.toBeInTheDocument();
+  });
+
   it('does not render "Visit Live Site" link when link is undefined', () => {
-    const projectNoLink = { ...mockProject, link: undefined };
+    const projectNoLink = { ...mockProject, liveUrl: undefined };
     render(<WorkModal isOpen={true} onClose={mockClose} project={projectNoLink} />);
     expect(screen.queryByText('Visit Live Site')).not.toBeInTheDocument();
   });
