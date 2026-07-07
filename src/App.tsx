@@ -36,20 +36,17 @@ const HomePage: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#F5F4F0] text-[#191813] selection:bg-[#D9481F]/20 font-sans">
+    <div className="min-h-screen overflow-x-clip bg-[#F5F4F0] text-[#191813] selection:bg-[#D9481F]/20 font-sans">
       <Helmet>
-        <title>MPDevFlow - Founder-Led Web & Product Development Studio</title>
+        <title>MPDevFlow - Web & Product Development Studio</title>
         <meta
           name="description"
-          content="MPDevFlow helps startups, agencies, and growing businesses build websites, MVPs, SaaS apps, dashboards, and internal tools with a trusted developer network from the Philippines."
+          content="MPDevFlow helps startups, agencies, and growing businesses build landing pages, MVPs, SaaS apps, dashboards, and internal tools with a trusted developer network from the Philippines."
         />
-        <meta
-          property="og:title"
-          content="MPDevFlow - Founder-Led Web & Product Development Studio"
-        />
+        <meta property="og:title" content="MPDevFlow - Web & Product Development Studio" />
         <meta
           property="og:description"
-          content="Founder-led web and product development for websites, MVPs, dashboards, and internal tools."
+          content="Web and product development for landing pages, MVPs, dashboards, and internal tools."
         />
         <meta property="og:url" content="https://mpdevflow.com" />
         <meta property="og:type" content="website" />
@@ -59,8 +56,8 @@ const App: React.FC = () => {
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ProfessionalService',
-            name: 'MP DevFlow',
-            description: 'Founder-led web and product development studio from the Philippines',
+            name: 'MPDevFlow',
+            description: 'Web and product development studio from the Philippines',
             url: 'https://mpdevflow.com',
             email: 'hello@mpdevflow.com',
             address: {
@@ -95,8 +92,14 @@ const App: React.FC = () => {
           }
         />
         <Route path="/case-studies/gamelobbyph" element={<GameLobbyPHCaseStudy />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsOfService />} />
+        <Route
+          path="/privacy"
+          element={<MarketingLayout>{() => <PrivacyPolicy />}</MarketingLayout>}
+        />
+        <Route
+          path="/terms"
+          element={<MarketingLayout>{() => <TermsOfService />}</MarketingLayout>}
+        />
       </Routes>
     </div>
   );

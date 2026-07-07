@@ -20,6 +20,8 @@ export interface Project {
   color: string;
   accentColor?: string;
   image?: string;
+  hasPreviewImage?: boolean;
+  previewImageFit?: 'cover' | 'contain';
   isStudioProject?: boolean;
   link?: string;
   // detailed fields for modal

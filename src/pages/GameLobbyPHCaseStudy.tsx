@@ -57,6 +57,8 @@ const OUTCOMES = [
   'Delivered on time and within scope',
 ];
 
+const GAMELOBBYPH_PREVIEW = '/images/gamelobbyph-preview.png';
+
 const GameLobbyPHCaseStudy: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -119,6 +121,14 @@ const GameLobbyPHCaseStudy: React.FC = () => {
               </span>
               <span className="text-cyan-400 font-medium">Client Project</span>
             </div>
+          </div>
+
+          <div className="mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-blue-950/30">
+            <img
+              src={GAMELOBBYPH_PREVIEW}
+              alt="GameLobbyPH game selection interface preview"
+              className="h-auto w-full object-cover"
+            />
           </div>
         </div>
       </section>
@@ -217,9 +227,9 @@ const GameLobbyPHCaseStudy: React.FC = () => {
               ))}
             </div>
             <blockquote className="text-lg md:text-xl text-slate-200 leading-relaxed font-medium mb-8">
-              "MP DevFlow is very detail-oriented and consistently delivers projects on time. They
+              "MPDevFlow is very detail-oriented and consistently delivers projects on time. They
               make sure everything matches exactly what we discussed, and they provide constant
-              updates to ensure the output is as good as possible. MP DevFlow makes sure your money
+              updates to ensure the output is as good as possible. MPDevFlow makes sure your money
               is well spent, making them the perfect partner for my business."
             </blockquote>
             <div className="flex items-center gap-4">

@@ -11,13 +11,28 @@ interface WorkModalProps {
 const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
   if (!isOpen || !project) return null;
 
+  const shouldShowProjectImage = project.hasPreviewImage && project.image;
+
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={onClose} />
 
       <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[#DDDAD1] bg-[#F5F4F0] shadow-2xl">
-        <div className="relative h-44 shrink-0 overflow-hidden bg-[#191813]">
-          <div className="absolute inset-0 bg-[radial-gradient(80%_90%_at_50%_115%,rgba(217,72,31,0.7),transparent_70%)]" />
+        <div className="relative h-52 shrink-0 overflow-hidden bg-[#191813]">
+          {shouldShowProjectImage ? (
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              className={`absolute inset-0 h-full w-full ${
+                project.previewImageFit === 'contain'
+                  ? 'object-contain p-8 md:p-10'
+                  : 'object-cover'
+              }`}
+            />
+          ) : (
+            <div className="absolute inset-0 bg-[radial-gradient(80%_90%_at_50%_115%,rgba(217,72,31,0.7),transparent_70%)]" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#191813] via-[#191813]/45 to-[#191813]/15" />
           <button
             onClick={onClose}
             className="absolute right-5 top-5 z-10 rounded-full bg-white/10 p-2 text-[#F5F4F0] transition-colors hover:bg-white/20"

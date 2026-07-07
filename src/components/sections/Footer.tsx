@@ -30,11 +30,11 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         <div className="mb-12 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="mb-4 text-4xl font-bold tracking-tight text-[#191813] md:text-6xl">
-              MPDevFlow<span className="text-[#D9481F]">.</span>
+              MPDevFlow
             </div>
             <p className="max-w-md leading-7 text-[#55524A]">
-              Founder-led web and product development from the Philippines for teams that need
-              practical work shipped properly.
+              Web and product development from the Philippines for teams that need practical work
+              shipped properly.
             </p>
           </div>
 

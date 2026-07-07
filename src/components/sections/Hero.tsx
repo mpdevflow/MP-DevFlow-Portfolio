@@ -10,25 +10,37 @@ const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   const scrollToSection = useSmoothScroll();
 
   return (
-    <section className="relative overflow-hidden border-b border-[#DDDAD1] px-4 pt-32 pb-20 md:pt-40 md:pb-28">
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-[radial-gradient(80%_90%_at_50%_110%,rgba(217,72,31,0.22),transparent_70%)]" />
+    <section className="relative overflow-hidden border-b border-[#DDDAD1] bg-[#F5F4F0] px-4 pt-32 pb-20 md:pt-40 md:pb-28">
+      <picture aria-hidden="true" className="pointer-events-none absolute inset-0 select-none">
+        <source media="(max-width: 767px)" srcSet="/images/mpdevflow-hero-bg-mobile.png" />
+        <img
+          src="/images/mpdevflow-hero-bg-desktop.png"
+          alt=""
+          className="h-full w-full object-cover object-[62%_100%] md:object-[68%_100%]"
+          fetchPriority="high"
+        />
+      </picture>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(245,244,240,0.98)_0%,rgba(245,244,240,0.9)_38%,rgba(245,244,240,0.38)_58%,rgba(245,244,240,0.02)_82%)]" />
+      <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#F5F4F0] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[#F5F4F0]" />
 
       <div className="relative mx-auto flex max-w-7xl flex-col gap-10">
         <div className="inline-flex w-fit items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-[#6E6B62]">
           <span className="h-2 w-2 rounded-full bg-[#D9481F]" />
-          Founder-led studio from the Philippines
+          Web and product studio from the Philippines
         </div>
 
         <div className="max-w-6xl">
           <h1 className="text-5xl font-semibold leading-[0.98] tracking-tight text-[#191813] md:text-7xl lg:text-8xl">
-            Founder-led web and product development for teams that need to ship.
+            Web and product development for teams that need to ship.
           </h1>
         </div>
 
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <p className="max-w-2xl text-lg leading-8 text-[#55524A] md:text-xl">
-            MP DevFlow helps startups, agencies, and growing businesses build landing pages, MVPs,
-            SaaS apps, dashboards, and internal tools with a trusted developer network led by MP.
+            MPDevFlow helps startups, agencies, and growing businesses build landing pages, MVPs,
+            SaaS apps, dashboards, and internal tools with a trusted developer network from the
+            Philippines.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">

@@ -51,7 +51,6 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           className="flex items-center gap-1 font-bold text-xl tracking-tight text-[#191813]"
         >
           <span>MPDevFlow</span>
-          <span className="text-[#D9481F]">.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-7 text-xs font-semibold text-[#6E6B62] uppercase tracking-[0.12em]">

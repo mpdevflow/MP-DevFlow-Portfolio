@@ -5,21 +5,22 @@
 @layer base {
   body {
     @apply bg-background text-white font-sans;
+    scrollbar-color: #cfcbc0 #f5f4f0;
   }
 
-  /* Custom scrollbar for deep space feel */
+  /* Keep the browser scrollbar aligned with the warm site canvas. */
   ::-webkit-scrollbar {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #0b0e14;
+    background: #f5f4f0;
   }
   ::-webkit-scrollbar-thumb {
-    background: #334155;
+    background: #cfcbc0;
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: #a5a199;
   }
 
   .work-rail::-webkit-scrollbar {

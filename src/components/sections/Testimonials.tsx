@@ -22,9 +22,9 @@ const Testimonials: React.FC = () => {
             ))}
           </div>
           <blockquote className="relative mb-8 text-xl font-medium leading-8 text-[#191813] md:text-2xl md:leading-10">
-            "MP DevFlow is very detail-oriented and consistently delivers projects on time. They
-            make sure everything matches exactly what we discussed, and they provide constant
-            updates to ensure the output is as good as possible."
+            "MPDevFlow is very detail-oriented and consistently delivers projects on time. They make
+            sure everything matches exactly what we discussed, and they provide constant updates to
+            ensure the output is as good as possible."
           </blockquote>
           <figcaption className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#191813] font-bold text-[#F5F4F0]">

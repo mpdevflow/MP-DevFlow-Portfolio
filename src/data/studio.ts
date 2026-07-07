@@ -21,10 +21,10 @@ export const NAV_ITEMS = [
 ];
 
 export const TRUST_POINTS = [
-  '10+ years frontend and product engineering',
-  'React, Next.js, Supabase, Tailwind, WordPress',
-  'Founder-led architecture, review, and delivery',
-  'Flexible team size depending on scope',
+  'Websites, MVPs, SaaS apps, dashboards, and tools',
+  'Modern stacks with AI-assisted execution',
+  'Architecture, QA, launch, and delivery support',
+  'Flexible build support for growing teams',
 ];
 
 export const AUDIENCES = [
@@ -49,7 +49,7 @@ export const AUDIENCES = [
   {
     title: 'Product Teams',
     description:
-      'Add senior-led execution for features, dashboards, UI systems, refactors, and product improvements.',
+      'Add senior execution for features, dashboards, UI systems, refactors, and product improvements.',
     icon: React.createElement(Users, { size: 22 }),
   },
 ];

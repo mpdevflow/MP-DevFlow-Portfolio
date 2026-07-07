@@ -108,7 +108,10 @@ const Work: React.FC = () => {
   };
 
   return (
-    <section id="work" className="border-b border-[#DDDAD1] bg-[#F5F4F0] py-20 md:py-24">
+    <section
+      id="work"
+      className="overflow-x-clip border-b border-[#DDDAD1] bg-[#F5F4F0] py-20 md:py-24"
+    >
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
@@ -164,16 +167,38 @@ const Work: React.FC = () => {
               }}
               className="group mr-5 flex w-[min(620px,85vw)] shrink-0 flex-col overflow-hidden rounded-lg bg-[#191813] text-left"
             >
-              <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-[#EFEEE8]">
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,#EAE8E0_0_12px,#E4E2D9_12px_24px)] opacity-70" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_110%,rgba(217,72,31,0.38),transparent_62%)]" />
-                <div className="absolute inset-10 rounded-full border border-[#CFCBC0]/60 opacity-70 transition-transform duration-700 group-hover:scale-95" />
-                <div className="absolute inset-20 rounded-full border border-[#CFCBC0]/50 opacity-70 transition-transform duration-700 group-hover:scale-105" />
-                <div
-                  className={`relative flex h-20 w-20 items-center justify-center rounded-full ${project.color} text-white shadow-2xl transition-transform duration-300 group-hover:scale-110`}
-                >
-                  <ExternalLink size={28} />
-                </div>
+              <div
+                className={`relative flex aspect-[16/10] items-center justify-center overflow-hidden ${
+                  project.previewImageFit === 'contain' ? 'bg-[#0C0516]' : 'bg-[#EFEEE8]'
+                }`}
+              >
+                {project.hasPreviewImage && project.image ? (
+                  <>
+                    <img
+                      src={project.image}
+                      alt={`${project.title} preview`}
+                      className={`absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.03] ${
+                        project.previewImageFit === 'contain'
+                          ? 'object-contain p-10 md:p-14'
+                          : 'object-cover'
+                      }`}
+                      draggable={false}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#191813]/20 via-transparent to-transparent" />
+                  </>
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-[linear-gradient(135deg,#EAE8E0_0_12px,#E4E2D9_12px_24px)] opacity-70" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_110%,rgba(217,72,31,0.38),transparent_62%)]" />
+                    <div className="absolute inset-10 rounded-full border border-[#CFCBC0]/60 opacity-70 transition-transform duration-700 group-hover:scale-95" />
+                    <div className="absolute inset-20 rounded-full border border-[#CFCBC0]/50 opacity-70 transition-transform duration-700 group-hover:scale-105" />
+                    <div
+                      className={`relative flex h-20 w-20 items-center justify-center rounded-full ${project.color} text-white shadow-2xl transition-transform duration-300 group-hover:scale-110`}
+                    >
+                      <ExternalLink size={28} />
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="flex items-center justify-between gap-5 p-5 md:px-6">
