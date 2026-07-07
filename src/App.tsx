@@ -11,6 +11,7 @@ import Testimonials from './components/sections/Testimonials';
 import Work from './components/sections/Work';
 import ScrollToTop from './components/ScrollToTop';
 import ContactPage from './pages/ContactPage';
+import GameLobbyPHCaseStudy from './pages/GameLobbyPHCaseStudy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ServicesPage from './pages/ServicesPage';
 import TermsOfService from './pages/TermsOfService';
@@ -42,6 +43,35 @@ const App: React.FC = () => {
           name="description"
           content="MPDevFlow helps startups, agencies, and growing businesses build websites, MVPs, SaaS apps, dashboards, and internal tools with a trusted developer network from the Philippines."
         />
+        <meta
+          property="og:title"
+          content="MPDevFlow - Founder-Led Web & Product Development Studio"
+        />
+        <meta
+          property="og:description"
+          content="Founder-led web and product development for websites, MVPs, dashboards, and internal tools."
+        />
+        <meta property="og:url" content="https://mpdevflow.com" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href="https://mpdevflow.com" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ProfessionalService',
+            name: 'MP DevFlow',
+            description: 'Founder-led web and product development studio from the Philippines',
+            url: 'https://mpdevflow.com',
+            email: 'hello@mpdevflow.com',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Quezon City',
+              addressCountry: 'PH',
+            },
+            serviceType: 'Web Development',
+            areaServed: 'Worldwide',
+          })}
+        </script>
       </Helmet>
 
       <ScrollToTop />
@@ -64,6 +94,7 @@ const App: React.FC = () => {
             </MarketingLayout>
           }
         />
+        <Route path="/case-studies/gamelobbyph" element={<GameLobbyPHCaseStudy />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
       </Routes>

@@ -18,6 +18,9 @@ export interface Project {
   description: string;
   tech: string[];
   color: string;
+  accentColor?: string;
+  image?: string;
+  isStudioProject?: boolean;
   link?: string;
   // detailed fields for modal
   context: string;
