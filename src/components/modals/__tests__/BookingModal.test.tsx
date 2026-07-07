@@ -11,25 +11,20 @@ describe('BookingModal Validation', () => {
 
   it('renders correctly when open', () => {
     render(<BookingModal isOpen={true} onClose={mockClose} />);
-    expect(screen.getByText("Let's Build")).toBeInTheDocument();
+    expect(screen.getByText('Start a Project')).toBeInTheDocument();
   });
 
   it('does not render when closed', () => {
     render(<BookingModal isOpen={false} onClose={mockClose} />);
-    expect(screen.queryByText("Let's Build")).not.toBeInTheDocument();
+    expect(screen.queryByText('Start a Project')).not.toBeInTheDocument();
   });
 
-  it('switches to inquiry tab and validates empty form submission', async () => {
+  it('validates empty form submission', async () => {
     render(<BookingModal isOpen={true} onClose={mockClose} />);
 
-    // Switch to inquiry tab
-    fireEvent.click(screen.getByText('Send Inquiry'));
-
-    // Try to submit
     const submitBtn = screen.getByText('Draft in Mail App');
     fireEvent.click(submitBtn);
 
-    // Check for validation errors
     await waitFor(() => {
       expect(screen.getByText('Name is required')).toBeInTheDocument();
       expect(screen.getByText('Invalid email address')).toBeInTheDocument();
@@ -41,15 +36,19 @@ describe('BookingModal Validation', () => {
 
   it('validates short message', async () => {
     render(<BookingModal isOpen={true} onClose={mockClose} />);
-    fireEvent.click(screen.getByText('Send Inquiry'));
 
     fireEvent.change(screen.getByPlaceholderText('John Doe'), { target: { value: 'Valid Name' } });
     fireEvent.change(screen.getByPlaceholderText('john@company.com'), {
       target: { value: 'john@example.com' },
     });
-    fireEvent.change(screen.getByPlaceholderText('Briefly describe what you want to build...'), {
-      target: { value: 'Too short' },
-    });
+    fireEvent.change(
+      screen.getByPlaceholderText(
+        'Briefly describe what you want to build, improve, fix, or validate...'
+      ),
+      {
+        target: { value: 'Too short' },
+      }
+    );
 
     fireEvent.click(screen.getByText('Draft in Mail App'));
 

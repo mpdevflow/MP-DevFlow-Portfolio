@@ -11,7 +11,6 @@ export const SOCIAL_LINKS = {
 export const NAVIGATION_LINKS = [
   { label: 'Home', href: '#', id: '' },
   { label: 'Services', href: '#services', id: 'services' },
-  { label: 'Philosophy', href: '#philosophy', id: 'philosophy' },
   { label: 'Work', href: '#work', id: 'work' },
-  { label: 'Testimonials', href: '#testimonials', id: 'testimonials' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
 ];

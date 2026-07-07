@@ -1,4 +1,10 @@
 import { CALENDAR_LINK, CONTACT_EMAIL } from '@/constants';
+import {
+  BUDGET_OPTIONS,
+  PROJECT_TYPE_OPTIONS,
+  STAGE_OPTIONS,
+  TIMELINE_OPTIONS,
+} from '@/data/studio';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Calendar, Check, Copy, Mail, MessageSquare, Send, X } from 'lucide-react';
 import React, { useState } from 'react';
@@ -8,7 +14,11 @@ import * as z from 'zod';
 const bookingSchema = z.object({
   name: z.string().min(2, 'Name is required'),
   email: z.string().email('Invalid email address'),
-  type: z.enum(['Web Application', 'Mobile App', 'AI Integration', 'Design System', 'Other']),
+  company: z.string().optional(),
+  projectType: z.enum(PROJECT_TYPE_OPTIONS),
+  budgetRange: z.enum(BUDGET_OPTIONS),
+  timeline: z.enum(TIMELINE_OPTIONS),
+  currentStage: z.enum(STAGE_OPTIONS),
   message: z.string().min(10, 'Please provide more details (at least 10 characters)'),
 });
 
@@ -20,7 +30,7 @@ interface BookingModalProps {
 }
 
 const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState<'inquiry' | 'calendar'>('calendar');
+  const [activeTab, setActiveTab] = useState<'inquiry' | 'calendar'>('inquiry');
   const [copied, setCopied] = useState(false);
 
   const {
@@ -30,9 +40,13 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
   } = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      type: 'Web Application',
       name: '',
       email: '',
+      company: '',
+      projectType: 'Not sure yet',
+      budgetRange: 'I need guidance',
+      timeline: 'I need guidance',
+      currentStage: 'Idea or rough notes',
       message: '',
     },
   });
@@ -40,10 +54,14 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const getEmailContent = (data: BookingFormValues) => {
-    const subject = `Project Inquiry: ${data.type} (${data.name})`;
+    const subject = `Project Inquiry: ${data.projectType} (${data.name})`;
     const body = `Name: ${data.name}
 Email: ${data.email}
-Project Type: ${data.type}
+Company: ${data.company || 'Not provided'}
+Project Type: ${data.projectType}
+Budget Range: ${data.budgetRange}
+Timeline: ${data.timeline}
+Current Stage: ${data.currentStage}
 
 Project Details:
 ${data.message}`;
@@ -57,10 +75,6 @@ ${data.message}`;
   };
 
   const handleGmail = () => {
-    // We use getValues() here because specific button click doesn't trigger form submit automatically unless type='submit'
-    // But for "Draft in Gmail" which is a secondary action, we might want validation first?
-    // Let's assume user wants to validate first. So we wrap this in handleSubmit too if we want validation.
-    // However, the original code allowed it without validation. Let's enforce validation for better quality.
     handleSubmit((data) => {
       const { subject, body } = getEmailContent(data);
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -74,196 +88,193 @@ ${data.message}`;
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const selectClass =
+    'w-full appearance-none rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] px-4 py-3 text-[#191813] outline-none transition-colors focus:border-[#D9481F] focus:ring-1 focus:ring-[#D9481F]';
+  const inputClass =
+    'w-full rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] px-4 py-3 text-[#191813] outline-none transition-colors placeholder:text-[#9A968B] focus:border-[#D9481F] focus:ring-1 focus:ring-[#D9481F]';
+  const labelClass = 'text-xs font-semibold uppercase tracking-[0.12em] text-[#6E6B62]';
+
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/55 backdrop-blur-md" onClick={onClose} />
 
-      {/* Modal Content */}
-      <div className="relative w-full max-w-2xl bg-[#0B0E14] border border-white/10 rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
-        {/* Glow Effect */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.5)] z-20" />
+      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[#DDDAD1] bg-[#F5F4F0] shadow-2xl">
+        <div className="h-1 w-full bg-[#D9481F]" />
 
-        {/* Header Section */}
-        <div className="p-6 pb-4 border-b border-white/5 bg-[#0B0E14]/50 backdrop-blur-sm z-10 flex flex-col gap-4">
-          <div className="flex justify-between items-start">
+        <div className="border-b border-[#DDDAD1] p-6">
+          <div className="mb-5 flex items-start justify-between gap-4">
             <div>
-              <h3 className="text-2xl font-bold text-white">Let's Build</h3>
-              <p className="text-slate-400 text-sm mt-1">Choose how you want to connect.</p>
+              <h3 className="text-2xl font-semibold tracking-tight text-[#191813]">
+                Start a Project
+              </h3>
+              <p className="mt-1 text-sm leading-6 text-[#55524A]">
+                Share what you know. It is fine if budget, timing, or scope still need shaping.
+              </p>
             </div>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-full"
+              className="rounded-full bg-[#EFEEE8] p-2 text-[#6E6B62] transition-colors hover:text-[#191813]"
+              aria-label="Close project inquiry modal"
             >
               <X size={20} />
             </button>
           </div>
 
-          {/* Tabs */}
-          <div className="flex p-1 bg-white/5 rounded-xl border border-white/5">
+          <div className="grid rounded-xl border border-[#DDDAD1] bg-[#EFEEE8] p-1 sm:grid-cols-2">
+            <button
+              onClick={() => setActiveTab('inquiry')}
+              className={`flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-colors ${
+                activeTab === 'inquiry'
+                  ? 'bg-[#191813] text-[#F5F4F0]'
+                  : 'text-[#55524A] hover:text-[#191813]'
+              }`}
+            >
+              <MessageSquare size={16} />
+              Send Brief
+            </button>
             <button
               onClick={() => setActiveTab('calendar')}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+              className={`flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-colors ${
                 activeTab === 'calendar'
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-[#191813] text-[#F5F4F0]'
+                  : 'text-[#55524A] hover:text-[#191813]'
               }`}
             >
               <Calendar size={16} />
               Book a Call
             </button>
-            <button
-              onClick={() => setActiveTab('inquiry')}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold rounded-lg transition-all ${
-                activeTab === 'inquiry'
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <MessageSquare size={16} />
-              Send Inquiry
-            </button>
           </div>
         </div>
 
-        {/* Body Section - Scrollable */}
-        <div className="overflow-y-auto flex-1 p-6">
+        <div className="flex-1 overflow-y-auto p-6">
           {activeTab === 'calendar' ? (
-            <div className="h-full min-h-[400px] flex flex-col items-center justify-center text-center">
-              <div className="w-full h-[500px] bg-white rounded-xl overflow-hidden">
+            <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
+              <div className="h-[520px] w-full overflow-hidden rounded-xl border border-[#DDDAD1] bg-white">
                 <iframe
                   src={CALENDAR_LINK}
                   width="100%"
                   height="100%"
                   frameBorder="0"
                   title="Select a Date & Time"
-                ></iframe>
+                />
               </div>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit(handleDefaultMail)}
-              className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300"
-            >
-              {/* Name & Email */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">
-                    Name
-                  </label>
+            <form onSubmit={handleSubmit(handleDefaultMail)} className="space-y-5">
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-1.5">
+                  <label className={labelClass}>Name</label>
                   <input
                     type="text"
                     {...register('name')}
-                    className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-1 transition-all placeholder:text-slate-600 ${errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-blue-500 focus:ring-blue-500'}`}
+                    className={inputClass}
                     placeholder="John Doe"
                   />
-                  {errors.name && <p className="text-red-400 text-xs">{errors.name.message}</p>}
+                  {errors.name && <p className="text-xs text-red-600">{errors.name.message}</p>}
                 </div>
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">
-                    Email
-                  </label>
+                <div className="space-y-1.5">
+                  <label className={labelClass}>Email</label>
                   <input
                     type="email"
                     {...register('email')}
-                    className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-1 transition-all placeholder:text-slate-600 ${errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-blue-500 focus:ring-blue-500'}`}
+                    className={inputClass}
                     placeholder="john@company.com"
                   />
-                  {errors.email && <p className="text-red-400 text-xs">{errors.email.message}</p>}
+                  {errors.email && <p className="text-xs text-red-600">{errors.email.message}</p>}
                 </div>
               </div>
 
-              {/* Type - Full Width */}
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">
-                  Project Type
-                </label>
-                <div className="relative">
-                  <select
-                    {...register('type')}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
-                  >
-                    <option className="bg-[#0B0E14]" value="Web Application">
-                      Web Application
-                    </option>
-                    <option className="bg-[#0B0E14]" value="Mobile App">
-                      Mobile App
-                    </option>
-                    <option className="bg-[#0B0E14]" value="AI Integration">
-                      AI Integration
-                    </option>
-                    <option className="bg-[#0B0E14]" value="Design System">
-                      Design System
-                    </option>
-                    <option className="bg-[#0B0E14]" value="Other">
-                      Other
-                    </option>
+              <div className="space-y-1.5">
+                <label className={labelClass}>Company or project name</label>
+                <input
+                  type="text"
+                  {...register('company')}
+                  className={inputClass}
+                  placeholder="Optional"
+                />
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-1.5">
+                  <label className={labelClass}>Project type</label>
+                  <select {...register('projectType')} className={selectClass}>
+                    {PROJECT_TYPE_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                    <svg
-                      width="10"
-                      height="6"
-                      viewBox="0 0 10 6"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M1 1L5 5L9 1"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <label className={labelClass}>Budget range</label>
+                  <select {...register('budgetRange')} className={selectClass}>
+                    {BUDGET_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
-              {/* Message */}
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">
-                  Project Details
-                </label>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-1.5">
+                  <label className={labelClass}>Timeline</label>
+                  <select {...register('timeline')} className={selectClass}>
+                    {TIMELINE_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className={labelClass}>Current stage</label>
+                  <select {...register('currentStage')} className={selectClass}>
+                    {STAGE_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className={labelClass}>Project details</label>
                 <textarea
                   {...register('message')}
-                  rows={4}
-                  className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-1 transition-all placeholder:text-slate-600 resize-none ${errors.message ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-blue-500 focus:ring-blue-500'}`}
-                  placeholder="Briefly describe what you want to build..."
+                  rows={5}
+                  className={`${inputClass} resize-none`}
+                  placeholder="Briefly describe what you want to build, improve, fix, or validate..."
                 />
-                {errors.message && <p className="text-red-400 text-xs">{errors.message.message}</p>}
+                {errors.message && <p className="text-xs text-red-600">{errors.message.message}</p>}
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col gap-3 mt-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={handleGmail}
-                    className="py-3 px-4 bg-white text-black hover:bg-slate-200 font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg"
-                  >
-                    <Mail size={18} />
-                    <span>Draft in Gmail</span>
-                  </button>
-                  <button
-                    type="submit"
-                    className="py-3 px-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-all border border-white/10 flex items-center justify-center gap-2"
-                  >
-                    <Send size={18} />
-                    <span>Draft in Mail App</span>
-                  </button>
-                </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={handleGmail}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#191813] px-4 py-3 font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
+                >
+                  <Mail size={18} />
+                  Draft in Gmail
+                </button>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#CFCBC0] bg-[#FAF9F5] px-4 py-3 font-semibold text-[#191813] transition-colors hover:border-[#191813]"
+                >
+                  <Send size={18} />
+                  Draft in Mail App
+                </button>
               </div>
 
-              {/* Fallback Copy Section */}
-              <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t border-white/5">
-                <span className="text-slate-500 text-sm">Prefer to copy?</span>
+              <div className="flex flex-wrap items-center justify-center gap-2 border-t border-[#DDDAD1] pt-4 text-sm text-[#6E6B62]">
+                <span>Prefer to copy?</span>
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                  className="inline-flex items-center gap-2 font-semibold text-[#D9481F] hover:text-[#191813]"
                 >
                   {CONTACT_EMAIL}
                   {copied ? <Check size={14} /> : <Copy size={14} />}

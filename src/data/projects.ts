@@ -3,7 +3,7 @@ import { Project } from '@/types';
 export const PROJECTS: Project[] = [
   {
     title: 'GameLobbyPH',
-    category: 'Gaming Startup',
+    category: 'Product Build',
     description:
       'Revenue optimization and real-time infrastructure for a high-growth gaming startup. Fixed critical data accuracy issues and stabilized gameplay.',
     tech: ['React', 'Vite', 'Supabase', 'WebSockets'],
@@ -20,7 +20,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: 'ClientEcho',
-    category: 'AI SaaS Product',
+    category: 'SaaS Product',
     description:
       "A 'Vibe Coding' experiment that graduated to a full product. AI-powered testimonial generator for e-commerce and professionals.",
     tech: ['React', 'Vite', 'OpenAI', 'Supabase', 'Tailwind'],
@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: 'BreakBuddy',
-    category: 'Internal R&D',
+    category: 'Web Product',
     description:
       'A rapid-prototype focus timer built to benchmark our AI-augmented workflow. Goes from concept to deployment in record time.',
     tech: ['React', 'Vite', 'Tailwind', 'Recharts'],

@@ -1,62 +1,69 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import BookingModal from './components/modals/BookingModal';
+import { Route, Routes } from 'react-router-dom';
+import MarketingLayout from './components/layout/MarketingLayout';
 import BentoGrid from './components/sections/BentoGrid';
 import CTA from './components/sections/CTA';
-import Footer from './components/sections/Footer';
 import Hero from './components/sections/Hero';
-import Navbar from './components/sections/Navbar';
-import Philosophy from './components/sections/Philosophy';
+import HowWeWork from './components/sections/HowWeWork';
 import TechStrip from './components/sections/TechStrip';
 import Testimonials from './components/sections/Testimonials';
 import Work from './components/sections/Work';
-
-import { Route, Routes } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
+import ContactPage from './pages/ContactPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import ServicesPage from './pages/ServicesPage';
 import TermsOfService from './pages/TermsOfService';
 
-const MainLayout: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openBooking = () => setIsModalOpen(true);
-
+const HomePage: React.FC = () => {
   return (
-    <>
-      <Navbar onOpenBooking={openBooking} />
-      <main>
-        <Hero onOpenBooking={openBooking} />
-        <TechStrip />
-        <BentoGrid />
-        <Philosophy onOpenBooking={openBooking} />
-        <Work />
-        <Testimonials />
-        {/* Call To Action Section - Enhanced with Hero-style visuals */}
-        <CTA onOpenBooking={openBooking} />
-      </main>
-      <Footer onOpenBooking={openBooking} />
-      <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
+    <MarketingLayout>
+      {(openBooking) => (
+        <>
+          <Hero onOpenBooking={openBooking} />
+          <TechStrip />
+          <BentoGrid />
+          <Work />
+          <HowWeWork onOpenBooking={openBooking} />
+          <Testimonials />
+          <CTA onOpenBooking={openBooking} />
+        </>
+      )}
+    </MarketingLayout>
   );
 };
 
-import ScrollToTop from './components/ScrollToTop';
-
-// ...
-
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#0B0E14] text-white selection:bg-blue-500/30 font-sans">
+    <div className="min-h-screen bg-[#F5F4F0] text-[#191813] selection:bg-[#D9481F]/20 font-sans">
       <Helmet>
-        <title>MP DevFlow - High Performance Web & AI Solutions</title>
+        <title>MPDevFlow - Founder-Led Web & Product Development Studio</title>
         <meta
           name="description"
-          content="We build revenue-generating digital assets. Full-stack web development, AI integration, and rapid MVP delivery."
+          content="MPDevFlow helps startups, agencies, and growing businesses build websites, MVPs, SaaS apps, dashboards, and internal tools with a trusted developer network from the Philippines."
         />
       </Helmet>
 
       <ScrollToTop />
 
       <Routes>
-        <Route path="/" element={<MainLayout />} />
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/services"
+          element={
+            <MarketingLayout>
+              {(openBooking) => <ServicesPage onOpenBooking={openBooking} />}
+            </MarketingLayout>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <MarketingLayout>
+              {(openBooking) => <ContactPage onOpenBooking={openBooking} />}
+            </MarketingLayout>
+          }
+        />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
       </Routes>

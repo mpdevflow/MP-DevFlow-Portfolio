@@ -1,66 +1,77 @@
-import { ServiceCardProps } from '@/types';
-import { Bot, Layers, Server, Smartphone } from 'lucide-react';
+import { AUDIENCES, SERVICES } from '@/data/studio';
 import React from 'react';
-
-const Card: React.FC<ServiceCardProps> = ({ title, description, icon, colSpan = 'col-span-1' }) => (
-  <div
-    className={`group relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 p-8 hover:bg-white/[0.07] transition-all duration-300 ${colSpan}`}
-  >
-    <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500 text-blue-500">
-      {icon}
-    </div>
-    <div className="relative z-10 h-full flex flex-col justify-end">
-      <div className="mb-4 text-blue-400 p-3 bg-blue-500/10 w-fit rounded-2xl border border-blue-500/20 backdrop-blur-md">
-        {React.cloneElement(icon as React.ReactElement, { size: 24 })}
-      </div>
-      <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-      <p className="text-slate-400 leading-relaxed">{description}</p>
-    </div>
-  </div>
-);
 
 const BentoGrid: React.FC = () => {
   return (
-    <section id="services" className="py-24 px-4 relative">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Expertise</h2>
-          <p className="text-slate-400">Technical capabilities designed for speed and scale.</p>
+    <>
+      <section className="border-b border-[#DDDAD1] px-4 py-20 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.4fr]">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-[#D9481F]">
+              (01) Who we help
+            </p>
+            <h2 className="max-w-md text-3xl font-semibold leading-tight tracking-tight text-[#191813] md:text-5xl">
+              Built for the people who have to ship it.
+            </h2>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {AUDIENCES.map((audience) => (
+              <article
+                key={audience.title}
+                className="rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] p-6 transition-colors hover:border-[#C8C2B4]"
+              >
+                <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-full bg-[#191813] text-[#F5F4F0]">
+                  {audience.icon}
+                </div>
+                <h3 className="mb-3 text-xl font-semibold tracking-tight text-[#191813]">
+                  {audience.title}
+                </h3>
+                <p className="leading-7 text-[#55524A]">{audience.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
-          {/* Card 1: Web Apps */}
-          <Card
-            title="Full-Stack Web Apps"
-            description="Custom dashboards, SaaS platforms, and internal tools built with React, Vite, and Supabase for maximum performance."
-            icon={<Layers size={80} />}
-            colSpan="md:col-span-2"
-          />
+      <section id="services" className="border-b border-[#DDDAD1] px-4 py-20 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 max-w-2xl">
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-[#D9481F]">
+              (02) What we build
+            </p>
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight text-[#191813] md:text-5xl">
+              Practical builds for websites, products, and operations.
+            </h2>
+          </div>
 
-          {/* Card 2: AI */}
-          <Card
-            title="API Integration"
-            description="We add smart features to your app using reliable APIs like OpenAI. Practical implementation, no complex research required."
-            icon={<Bot size={80} />}
-          />
-
-          {/* Card 3: Mobile */}
-          <Card
-            title="Mobile-Responsive"
-            description="We build web apps that work perfectly on phones. If you need a native app later, we can adapt our React code to React Native."
-            icon={<Smartphone size={80} />}
-          />
-
-          {/* Card 4: Infra */}
-          <Card
-            title="Secure Cloud Hosting"
-            description="Secure, zero-config hosting on Vercel and Supabase. We focus on shipping products, not managing servers."
-            icon={<Server size={80} />}
-            colSpan="md:col-span-2"
-          />
+          <div className="divide-y divide-[#DDDAD1] border-y border-[#DDDAD1]">
+            {SERVICES.map((service, index) => (
+              <article
+                key={service.title}
+                className="grid gap-5 py-7 md:grid-cols-[72px_0.9fr_1.1fr] md:items-center md:gap-8"
+              >
+                <div className="flex items-center gap-4 font-mono text-sm text-[#6E6B62]">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#EFEEE8] text-[#D9481F] md:hidden">
+                    {service.icon}
+                  </span>
+                </div>
+                <h3 className="text-2xl font-semibold tracking-tight text-[#191813] md:text-4xl">
+                  {service.title}
+                </h3>
+                <div className="flex gap-4">
+                  <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#EFEEE8] text-[#D9481F] md:flex">
+                    {service.icon}
+                  </span>
+                  <p className="max-w-xl leading-7 text-[#55524A]">{service.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

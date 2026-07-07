@@ -21,4 +21,8 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #475569;
   }
+
+  .work-rail::-webkit-scrollbar {
+    display: none;
+  }
 }

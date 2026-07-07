@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
 interface CTAProps {
@@ -6,35 +7,28 @@ interface CTAProps {
 
 const CTA: React.FC<CTAProps> = ({ onOpenBooking }) => {
   return (
-    <section
-      id="contact"
-      className="py-32 px-4 relative overflow-hidden flex flex-col items-center justify-center"
-    >
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[#0B0E14] z-0" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] z-0"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15)_0%,transparent_70%)] z-0"></div>
-
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <div className="inline-block mb-4 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase">
-          Limited Availability
-        </div>
-        <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-          Ready to build something <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-            remarkable?
-          </span>
+    <section id="contact" className="relative overflow-hidden bg-[#14130F] px-4 py-28 md:py-36">
+      <div className="absolute inset-0 bg-[radial-gradient(90%_80%_at_50%_115%,rgba(232,98,47,0.85)_0%,rgba(217,72,31,0.42)_36%,transparent_72%)]" />
+      <div className="relative mx-auto flex max-w-5xl flex-col items-center text-center">
+        <p className="mb-5 font-mono text-xs uppercase tracking-[0.16em] text-[#E6A58E]">
+          Project inquiry
+        </p>
+        <h2 className="max-w-4xl text-4xl font-semibold leading-none tracking-tight text-[#F5F4F0] md:text-7xl">
+          Need a website, MVP, dashboard, or dev support?
         </h2>
-        <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-          We accept a limited number of new clients each quarter to ensure uncompromised quality.
-          Secure your slot today and let's turn your vision into revenue.
+        <p className="mt-7 max-w-2xl text-lg leading-8 text-[#D6D4CC]">
+          Tell us what you are trying to build. We will help shape the scope, choose the right
+          approach, and move it toward launch even if the budget or timeline is not fully defined
+          yet.
         </p>
         <button
           onClick={onOpenBooking}
-          className="group relative inline-flex items-center justify-center px-10 py-5 bg-white text-blue-950 font-bold rounded-full transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-1 cursor-pointer overflow-hidden"
+          className="mt-10 inline-flex items-center gap-3 rounded-full bg-[#F5F4F0] py-3 pl-3 pr-7 text-sm font-semibold text-[#191813] transition-colors hover:bg-white"
         >
-          <span className="relative z-10">Book a Discovery Call</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-slate-200 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#D9481F] text-[#F5F4F0]">
+            <ArrowRight size={18} />
+          </span>
+          Send a Project Brief
         </button>
       </div>
     </section>

@@ -13,129 +13,102 @@ const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity animate-in fade-in duration-200"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={onClose} />
 
-      {/* Modal Content */}
-      <div className="relative w-full max-w-3xl bg-[#0B0E14] border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200">
-        {/* Header Image Area */}
-        <div
-          className={`h-40 w-full ${project.color} bg-opacity-20 relative overflow-hidden shrink-0`}
-        >
-          <div className={`absolute inset-0 ${project.color} bg-opacity-30 blur-3xl`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14] to-transparent" />
-
+      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[#DDDAD1] bg-[#F5F4F0] shadow-2xl">
+        <div className="relative h-44 shrink-0 overflow-hidden bg-[#191813]">
+          <div className="absolute inset-0 bg-[radial-gradient(80%_90%_at_50%_115%,rgba(217,72,31,0.7),transparent_70%)]" />
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-full bg-black/20 hover:bg-white/10 text-white/70 hover:text-white transition-all backdrop-blur-md z-10"
+            className="absolute right-5 top-5 z-10 rounded-full bg-white/10 p-2 text-[#F5F4F0] transition-colors hover:bg-white/20"
+            aria-label="Close case study"
           >
             <X size={20} />
           </button>
 
-          <div className="absolute bottom-6 left-8">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-md">
-                {project.category}
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">{project.title}</h2>
+          <div className="absolute bottom-6 left-6 right-6">
+            <span className="mb-3 inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.12em] text-[#D6D4CC]">
+              {project.category}
+            </span>
+            <h2 className="text-3xl font-semibold tracking-tight text-[#F5F4F0] md:text-4xl">
+              {project.title}
+            </h2>
           </div>
         </div>
 
-        {/* Scrollable Body */}
-        <div className="overflow-y-auto p-8 custom-scrollbar">
-          {/* Context */}
-          <div className="mb-10">
-            <p className="text-lg text-slate-300 leading-relaxed font-medium">{project.context}</p>
-          </div>
+        <div className="custom-scrollbar flex-1 overflow-y-auto p-6 md:p-8">
+          <p className="mb-8 text-lg font-medium leading-8 text-[#191813]">{project.context}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            {/* Challenge */}
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-              <div className="flex items-center gap-3 mb-4 text-red-400">
-                <TrendingUp className="rotate-180" size={24} />
-                <h3 className="text-lg font-bold text-white">The Challenge</h3>
+          <div className="mb-8 grid gap-5 md:grid-cols-2">
+            <div className="rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] p-5">
+              <div className="mb-4 flex items-center gap-3 text-[#D9481F]">
+                <TrendingUp className="rotate-180" size={22} />
+                <h3 className="font-semibold text-[#191813]">The Challenge</h3>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed">{project.challenge}</p>
+              <p className="text-sm leading-6 text-[#55524A]">{project.challenge}</p>
             </div>
 
-            {/* Solution */}
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-              <div className="flex items-center gap-3 mb-4 text-emerald-400">
-                <Zap size={24} />
-                <h3 className="text-lg font-bold text-white">Our Solution</h3>
+            <div className="rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] p-5">
+              <div className="mb-4 flex items-center gap-3 text-[#D9481F]">
+                <Zap size={22} />
+                <h3 className="font-semibold text-[#191813]">Our Solution</h3>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed">{project.solution}</p>
+              <p className="text-sm leading-6 text-[#55524A]">{project.solution}</p>
             </div>
           </div>
 
-          {/* Tech Stack */}
-          <div className="mb-10">
-            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">
+          <div className="mb-8">
+            <h4 className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-[#6E6B62]">
               Core Technologies
             </h4>
             <div className="flex flex-wrap gap-2">
-              {project.tech.map((t, i) => (
+              {project.tech.map((tech) => (
                 <span
-                  key={i}
-                  className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-sm font-medium"
+                  key={tech}
+                  className="rounded-full border border-[#DDDAD1] bg-[#FAF9F5] px-4 py-2 text-sm font-medium text-[#55524A]"
                 >
-                  {t}
+                  {tech}
                 </span>
               ))}
             </div>
           </div>
 
-          {/* Impact/Outcome */}
-          <div className="border-t border-white/10 pt-8">
+          <div className="border-t border-[#DDDAD1] pt-7">
             <div className="flex items-start gap-4">
-              <div className="mt-1 p-2 bg-blue-500/10 rounded-full text-blue-400">
-                <Shield size={24} />
+              <div className="mt-1 rounded-full bg-[#191813] p-2 text-[#F5F4F0]">
+                <Shield size={22} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white mb-2">The Outcome</h3>
-                <p className="text-slate-400 leading-relaxed">{project.outcome}</p>
+                <h3 className="mb-2 text-xl font-semibold tracking-tight text-[#191813]">
+                  The Outcome
+                </h3>
+                <p className="leading-7 text-[#55524A]">{project.outcome}</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Footer CTA */}
-        <div className="p-6 border-t border-white/5 bg-[#0B0E14] shrink-0 flex flex-col md:flex-row gap-4">
+        <div className="flex shrink-0 flex-col gap-3 border-t border-[#DDDAD1] bg-[#EFEEE8] p-5 md:flex-row">
           {project.link && (
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-900/20"
+              className="flex-1 rounded-xl bg-[#191813] py-4 text-center font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
             >
-              Visit Live Site <ExternalLink size={18} />
+              <span className="inline-flex items-center justify-center gap-2">
+                Visit Live Site <ExternalLink size={18} />
+              </span>
             </a>
           )}
           <button
             onClick={onClose}
-            className="flex-1 py-4 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-bold rounded-xl transition-colors"
+            className="flex-1 rounded-xl border border-[#CFCBC0] bg-[#FAF9F5] py-4 font-semibold text-[#191813] transition-colors hover:border-[#191813]"
           >
             Close Case Study
           </button>
         </div>
       </div>
-
-      <style>{`
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-      `}</style>
     </div>
   );
 };

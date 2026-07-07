@@ -1,98 +1,199 @@
 import { PROJECTS } from '@/data/projects';
 import { Project } from '@/types';
 import { ArrowRight, ExternalLink } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import WorkModal from '../modals/WorkModal';
 
 const Work: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const railRef = useRef<HTMLDivElement>(null);
+  const hoveringRef = useRef(false);
+  const draggingRef = useRef(false);
+  const dragMovedRef = useRef(0);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollRef = useRef(0);
+  const pressedProjectRef = useRef<Project | null>(null);
 
-  const handleProjectClick = (project: Project) => {
+  const loopProjects = [...PROJECTS, ...PROJECTS];
+
+  useEffect(() => {
+    let frameId = 0;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const rail = railRef.current;
+      const delta = Math.min(50, now - last);
+      last = now;
+
+      if (rail && !rail.matches(':hover') && !hoveringRef.current && !draggingRef.current) {
+        rail.scrollLeft += delta * 0.045;
+        const halfway = rail.scrollWidth / 2;
+
+        if (halfway > 0 && rail.scrollLeft >= halfway) {
+          rail.scrollLeft -= halfway;
+        }
+      }
+
+      frameId = requestAnimationFrame(tick);
+    };
+
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    const rail = railRef.current;
+    if (!rail) return;
+
+    const card = (event.target as HTMLElement).closest<HTMLElement>('[data-project-index]');
+    const projectIndex = card?.dataset.projectIndex;
+
+    draggingRef.current = true;
+    dragMovedRef.current = 0;
+    dragStartXRef.current = event.clientX;
+    dragStartScrollRef.current = rail.scrollLeft;
+    pressedProjectRef.current =
+      projectIndex === undefined ? null : PROJECTS[Number(projectIndex) % PROJECTS.length] || null;
+    rail.setPointerCapture(event.pointerId);
+    rail.style.cursor = 'grabbing';
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const rail = railRef.current;
+    if (!rail || !draggingRef.current) return;
+
+    const deltaX = event.clientX - dragStartXRef.current;
+    dragMovedRef.current = Math.max(dragMovedRef.current, Math.abs(deltaX));
+
+    let nextScroll = dragStartScrollRef.current - deltaX;
+    const halfway = rail.scrollWidth / 2;
+
+    if (halfway > 0) {
+      if (nextScroll >= halfway) {
+        dragStartScrollRef.current -= halfway;
+        nextScroll -= halfway;
+      }
+
+      if (nextScroll < 0) {
+        dragStartScrollRef.current += halfway;
+        nextScroll += halfway;
+      }
+    }
+
+    rail.scrollLeft = nextScroll;
+  };
+
+  const stopDragging = (clearPressedProject = true) => {
+    draggingRef.current = false;
+    if (clearPressedProject) pressedProjectRef.current = null;
+    if (railRef.current) railRef.current.style.cursor = 'grab';
+  };
+
+  const handlePointerUp = () => {
+    const project = pressedProjectRef.current;
+    const shouldOpenProject = project && dragMovedRef.current <= 6;
+
+    stopDragging();
+
+    if (shouldOpenProject) {
+      setSelectedProject(project);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleKeyboardClick = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
 
   return (
-    <section id="work" className="py-24 px-4 relative bg-[#0B0E14]">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+    <section id="work" className="border-b border-[#DDDAD1] bg-[#F5F4F0] py-20 md:py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Selected Work</h2>
-            <p className="text-slate-400 max-w-lg">
-              We don't just write code; we build revenue-generating assets. Here are a few of our
-              recent favorites.
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-[#D9481F]">
+              (03) Selected work
             </p>
+            <h2 className="max-w-2xl text-3xl font-semibold leading-tight tracking-tight text-[#191813] md:text-5xl">
+              The work gets more room to speak.
+            </h2>
           </div>
+          <p className="max-w-md leading-7 text-[#55524A]">
+            A unified look at websites, product builds, dashboards, support work, and shipped
+            experiments that show how MPDevFlow thinks through delivery.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {PROJECTS.map((project, index) => (
-            <div
-              key={index}
-              onClick={() => handleProjectClick(project)}
-              className="group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:bg-white/[0.07] transition-all duration-300 flex flex-col cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/10"
+        <div
+          ref={railRef}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerEnter={() => {
+            hoveringRef.current = true;
+          }}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={() => stopDragging()}
+          onPointerLeave={() => {
+            hoveringRef.current = false;
+            stopDragging(false);
+          }}
+          onMouseEnter={() => {
+            hoveringRef.current = true;
+          }}
+          onMouseLeave={() => {
+            hoveringRef.current = false;
+            stopDragging();
+          }}
+          className="work-rail flex cursor-grab touch-pan-y select-none overflow-x-auto pb-2"
+          style={{
+            marginLeft: 'calc(50% - 50vw)',
+            marginRight: 'calc(50% - 50vw)',
+            paddingLeft: 'max(1rem, calc((100vw - 80rem) / 2 + 1rem))',
+            paddingRight: '1rem',
+            scrollbarWidth: 'none',
+          }}
+        >
+          {loopProjects.map((project, index) => (
+            <button
+              key={`${project.title}-${index}`}
+              type="button"
+              data-project-index={index}
+              onClick={(event) => {
+                if (event.detail === 0) handleKeyboardClick(project);
+              }}
+              className="group mr-5 flex w-[min(620px,85vw)] shrink-0 flex-col overflow-hidden rounded-lg bg-[#191813] text-left"
             >
-              {/* Image Placeholder */}
-              {/* Image Placeholder */}
-              <div
-                className={`h-48 w-full ${project.color} bg-opacity-5 flex items-center justify-center relative overflow-hidden`}
-              >
-                {/* 1. Grid Pattern */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] opacity-20" />
-
-                {/* 2. Glow Effects */}
+              <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-[#EFEEE8]">
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,#EAE8E0_0_12px,#E4E2D9_12px_24px)] opacity-70" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_110%,rgba(217,72,31,0.38),transparent_62%)]" />
+                <div className="absolute inset-10 rounded-full border border-[#CFCBC0]/60 opacity-70 transition-transform duration-700 group-hover:scale-95" />
+                <div className="absolute inset-20 rounded-full border border-[#CFCBC0]/50 opacity-70 transition-transform duration-700 group-hover:scale-105" />
                 <div
-                  className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 ${project.color} bg-opacity-20 rounded-full blur-[50px] group-hover:blur-[70px] transition-all duration-500`}
-                />
-
-                {/* 3. Decorative Rings */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-                  <div className="w-64 h-64 border border-white/10 rounded-full scale-105 group-hover:scale-100 transition-transform duration-700 ease-out" />
-                  <div className="w-48 h-48 border border-white/10 rounded-full scale-95 group-hover:scale-100 transition-transform duration-700 ease-out absolute" />
-                </div>
-
-                {/* 4. Icon */}
-                <div className="z-10 bg-white/5 p-5 rounded-2xl backdrop-blur-md border border-white/10 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300 shadow-2xl">
-                  <ExternalLink size={28} className="text-white opacity-90" />
-                </div>
-
-                {/* Overlay Text on Hover */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-6">
-                  <span className="text-white font-semibold flex items-center gap-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    View Case Study <ArrowRight size={16} />
-                  </span>
+                  className={`relative flex h-20 w-20 items-center justify-center rounded-full ${project.color} text-white shadow-2xl transition-transform duration-300 group-hover:scale-110`}
+                >
+                  <ExternalLink size={28} />
                 </div>
               </div>
 
-              <div className="p-8 flex-1 flex flex-col">
-                <div className="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-2">
-                  {project.category}
+              <div className="flex items-center justify-between gap-5 p-5 md:px-6">
+                <div className="min-w-0">
+                  <h3 className="truncate text-lg font-semibold tracking-tight text-[#F5F4F0] md:text-xl">
+                    {project.title}
+                  </h3>
+                  <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-[#A5A199]">
+                    {project.category}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tech.slice(0, 3).map((t, i) => (
-                    <span
-                      key={i}
-                      className="text-xs font-medium text-slate-300 bg-white/5 px-3 py-1 rounded-full border border-white/5"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                  {project.tech.length > 3 && (
-                    <span className="text-xs font-medium text-slate-300 bg-white/5 px-3 py-1 rounded-full border border-white/5">
-                      +{project.tech.length - 3}
-                    </span>
-                  )}
-                </div>
+                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/25 px-4 py-2.5 text-sm font-semibold text-[#D6D4CC] transition-colors group-hover:border-[#F5F4F0] group-hover:text-[#F5F4F0]">
+                  View work
+                  <ArrowRight
+                    size={15}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
+                </span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
