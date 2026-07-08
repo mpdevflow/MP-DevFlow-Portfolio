@@ -94,6 +94,10 @@ const App: React.FC = () => {
         />
         <Route path="/case-studies/gamelobbyph" element={<GameLobbyPHCaseStudy />} />
         <Route
+          path="/case-studies/serbisyo-barangay"
+          element={<ProjectCaseStudyPage title="Serbisyo Barangay" />}
+        />
+        <Route
           path="/case-studies/supra-data"
           element={<ProjectCaseStudyPage title="Supra Data" />}
         />

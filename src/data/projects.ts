@@ -24,6 +24,28 @@ export const PROJECTS: Project[] = [
       'Since deployment, GameLobbyPH has seen a significant increase in daily active users due to the stabilized match experience. The new dashboard now provides the founders with real-time, trusted financial data, allowing them to make confident investment decisions.',
   },
   {
+    title: 'Serbisyo Barangay',
+    category: 'GovTech Platform',
+    isStudioProject: false,
+    description:
+      'A Smart Barangay Operating System concept for resident master data, digital IDs, QR benefits, document automation, mobile service requests, and official operations dashboards.',
+    tech: ['React', 'GovTech', 'Digital ID', 'Workflow Automation'],
+    color: 'bg-cyan-600',
+    accentColor: 'from-slate-950 to-cyan-950',
+    image: '/images/serbisyo-barangay-preview.png',
+    hasPreviewImage: true,
+    caseStudyPath: '/case-studies/serbisyo-barangay',
+    liveUrl: 'https://serbisyobarangay.com/platform',
+    context:
+      'Serbisyo Barangay is positioned as a connected operating system for barangay service delivery. The platform brings resident profiles, household relationships, digital identity, benefits, requests, complaints, CMS tools, mobile apps, and analytics into one product experience.',
+    challenge:
+      'Barangay operations often depend on disconnected records, manual verification, and paper-heavy request handling. That makes it harder for officials to validate residents, route benefits, monitor complaints, and give residents clear status updates.',
+    solution:
+      'The use case centers on a resident requesting a barangay clearance through the mobile app. The system verifies the resident through master data and digital ID, routes the request for official approval, applies e-signature, generates a QR-verifiable PDF, and keeps the resident updated from submission to download.',
+    outcome:
+      'The result is a simpler service path for residents and a clearer operations surface for officials: faster document turnaround, stronger eligibility checks, better audit trails, and more reliable visibility across barangay programs and requests.',
+  },
+  {
     title: 'Supra Data',
     category: 'Realtime Data Platform',
     isStudioProject: false,
