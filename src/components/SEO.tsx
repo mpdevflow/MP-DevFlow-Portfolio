@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SITE_URL = 'https://mpdevflow.com';
-const DEFAULT_IMAGE = '/images/mpdevflow-hero-bg-desktop.png';
+const DEFAULT_IMAGE = '/assets/seo_og_share.png';
 
 interface SEOProps {
   title: string;
