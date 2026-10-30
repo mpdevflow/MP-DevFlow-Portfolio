@@ -1,42 +1,50 @@
 import SEO from '@/components/SEO';
-import BentoGrid from '@/components/sections/BentoGrid';
 import CTA from '@/components/sections/CTA';
 import HowWeWork from '@/components/sections/HowWeWork';
-import TechStrip from '@/components/sections/TechStrip';
-import React from 'react';
-
-interface ServicesPageProps {
-  onOpenBooking: () => void;
-}
-
-const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenBooking }) => {
+import { serviceGroups } from '@/components/sections/BentoGrid';
+export default function ServicesPage({ onOpenBooking }: { onOpenBooking: () => void }) {
   return (
     <>
       <SEO
-        title="Services - MPDevFlow"
-        description="Explore MPDevFlow services for landing pages, MVPs, SaaS apps, dashboards, internal tools, and flexible build support for growing teams."
+        title="Services — MPDevFlow"
+        description="Senior-led websites, MVPs, web apps, internal tools and ongoing development support from the Philippines."
         path="/services"
       />
-      <section className="border-b border-[#DDDAD1] px-4 pt-32 pb-16 md:pt-40 md:pb-24">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-5 font-mono text-xs uppercase tracking-[0.16em] text-[#D9481F]">
-            Services
-          </p>
-          <h1 className="max-w-5xl text-5xl font-semibold leading-none tracking-tight text-[#191813] md:text-7xl">
-            Websites, MVPs, dashboards, and dev support for teams that need momentum.
-          </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-[#55524A]">
-            Choose a focused build, ongoing support, or a flexible execution team around a product
-            problem that needs momentum.
-          </p>
+      <section className="page-intro">
+        <div className="chapter">
+          <span>Services</span>
+          <i />
+          <span>Practical work. Clear ownership.</span>
         </div>
+        <h1>
+          What you need.
+          <br />
+          <em>
+            Built thoughtfully<span className="accent">.</span>
+          </em>
+        </h1>
+        <p className="lead">
+          A focused launch, a working first product or a better way to run the day-to-day. Senior
+          direction from scoping through delivery.
+        </p>
       </section>
-      <TechStrip />
-      <BentoGrid />
+      <section className="service-details">
+        {serviceGroups.map((s, i) => (
+          <article className="service-detail" id={`service-${i + 1}`} key={s.title}>
+            <span className="eyebrow">0{i + 1} / Service</span>
+            <h2>{s.title}</h2>
+            <div>
+              <p>{s.description}</p>
+              <p className="eyebrow">{s.scope}</p>
+              <button className="text-link" onClick={onOpenBooking}>
+                Discuss this work <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </article>
+        ))}
+      </section>
       <HowWeWork onOpenBooking={onOpenBooking} />
       <CTA onOpenBooking={onOpenBooking} />
     </>
   );
-};
-
-export default ServicesPage;
+}

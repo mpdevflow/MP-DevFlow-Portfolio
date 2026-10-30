@@ -6,7 +6,7 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     if (!hash) {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
 
@@ -18,7 +18,10 @@ const ScrollToTop = () => {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
     });
   }, [hash, pathname]);
 

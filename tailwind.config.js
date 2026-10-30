@@ -3,8 +3,13 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Manrope', 'Arial', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
+      },
       colors: {
-        background: '#0B0E14',
+        background: 'var(--canvas)',
+        accent: 'var(--accent)',
       },
     },
   },

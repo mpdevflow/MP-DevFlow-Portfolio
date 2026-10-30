@@ -1,9 +1,7 @@
-import type { FC } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 
 const SITE_URL = 'https://mpdevflow.com';
 const DEFAULT_IMAGE = '/assets/seo_og_share.png';
-
 interface SEOProps {
   title: string;
   description: string;
@@ -11,41 +9,52 @@ interface SEOProps {
   image?: string;
   type?: 'website' | 'article';
 }
+const absoluteUrl = (path: string) => new URL(path, SITE_URL).href;
 
-const toAbsoluteUrl = (path: string) => {
-  if (path.startsWith('http')) return path;
-  return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
-};
-
-const SEO: FC<SEOProps> = ({
+export default function SEO({
   title,
   description,
   path = '/',
   image = DEFAULT_IMAGE,
   type = 'website',
-}) => {
-  const canonicalUrl = toAbsoluteUrl(path);
-  const imageUrl = toAbsoluteUrl(image);
-
-  return (
-    <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={canonicalUrl} />
-
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={imageUrl} />
-
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={canonicalUrl} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={imageUrl} />
-    </Helmet>
-  );
-};
-
-export default SEO;
+}: SEOProps) {
+  useEffect(() => {
+    document.title = title;
+    const canonicalUrl = absoluteUrl(path);
+    const imageUrl = absoluteUrl(image);
+    const meta = (attribute: 'name' | 'property', key: string, content: string) => {
+      let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attribute, key);
+        document.head.append(element);
+      }
+      element.content = content;
+    };
+    meta('name', 'description', description);
+    for (const [key, value] of Object.entries({
+      type,
+      url: canonicalUrl,
+      title,
+      description,
+      image: imageUrl,
+    }))
+      meta('property', `og:${key}`, value);
+    for (const [key, value] of Object.entries({
+      card: 'summary_large_image',
+      url: canonicalUrl,
+      title,
+      description,
+      image: imageUrl,
+    }))
+      meta('name', `twitter:${key}`, value);
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.append(canonical);
+    }
+    canonical.href = canonicalUrl;
+  }, [title, description, path, image, type]);
+  return null;
+}

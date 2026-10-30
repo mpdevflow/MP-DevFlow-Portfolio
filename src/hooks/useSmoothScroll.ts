@@ -5,7 +5,10 @@ export const useSmoothScroll = () => {
     e.preventDefault();
 
     if (id === '') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
       return;
     }
 
@@ -17,7 +20,7 @@ export const useSmoothScroll = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth',
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
       });
     }
   }, []);

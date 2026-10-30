@@ -1,90 +1,28 @@
+import { Link } from 'react-router-dom';
 import { CONTACT_EMAIL } from '@/constants';
-import { NAV_ITEMS } from '@/data/studio';
-import { useSmoothScroll } from '@/hooks/useSmoothScroll';
-import { Mail } from 'lucide-react';
-import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-
-interface FooterProps {
-  onOpenBooking: () => void;
-}
-
-const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
-  const scrollToSection = useSmoothScroll();
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, id: string, route = '/') => {
-    if (location.pathname === '/') {
-      scrollToSection(e, id);
-      return;
-    }
-
-    e.preventDefault();
-    navigate(route === '/' && id ? `/#${id}` : route);
-  };
-
+export default function Footer() {
   return (
-    <footer className="border-t border-[#DDDAD1] bg-[#F5F4F0] px-4 pt-16 pb-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="mb-4 text-4xl font-bold tracking-tight text-[#191813] md:text-6xl">
-              MPDevFlow
-            </div>
-            <p className="max-w-md leading-7 text-[#55524A]">
-              Web and product development from the Philippines for teams that need practical work
-              shipped properly.
-            </p>
-          </div>
-
-          <button
-            onClick={onOpenBooking}
-            className="w-fit rounded-full bg-[#191813] px-6 py-3 text-sm font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
-          >
-            Book a Free Call
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-8 border-t border-[#DDDAD1] pt-6 md:flex-row md:items-center md:justify-between">
-          <nav className="flex flex-wrap gap-5 font-mono text-xs uppercase tracking-[0.1em] text-[#6E6B62]">
-            <a href="#" onClick={(e) => handleNav(e, '')} className="hover:text-[#191813]">
-              Home
-            </a>
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleNav(e, item.id, item.route)}
-                className="hover:text-[#191813]"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex flex-col gap-4 text-sm text-[#6E6B62] md:flex-row md:items-center md:gap-6">
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="inline-flex items-center gap-2 hover:text-[#191813]"
-            >
-              <Mail size={16} />
-              {CONTACT_EMAIL}
-            </a>
-            <span>&copy; {new Date().getFullYear()} MPDevFlow</span>
-            <div className="flex gap-4">
-              <Link to="/privacy" className="hover:text-[#191813]">
-                Privacy
-              </Link>
-              <Link to="/terms" className="hover:text-[#191813]">
-                Terms
-              </Link>
-            </div>
-          </div>
-        </div>
+    <footer className="site-footer">
+      <div className="footer-top">
+        <Link to="/" className="wordmark">
+          MPDevFlow
+        </Link>
+        <span className="eyebrow">Independent thinking. Working products.</span>
+        <a className="text-link" href={`mailto:${CONTACT_EMAIL}`}>
+          {CONTACT_EMAIL} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} MPDevFlow · Philippines</span>
+        <nav aria-label="Footer navigation">
+          <Link to="/#work">Work</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/#studio">Studio</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
+        </nav>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

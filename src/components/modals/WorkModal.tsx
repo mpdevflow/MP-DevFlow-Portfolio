@@ -19,8 +19,8 @@ const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={onClose} />
 
-      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[#DDDAD1] bg-[#F5F4F0] shadow-2xl">
-        <div className="relative h-52 shrink-0 overflow-hidden bg-[#191813]">
+      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--canvas)] shadow-2xl">
+        <div className="relative h-52 shrink-0 overflow-hidden bg-[var(--ink)]">
           {shouldShowProjectImage ? (
             <img
               src={project.image}
@@ -34,55 +34,55 @@ const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
           ) : (
             <div className="absolute inset-0 bg-[radial-gradient(80%_90%_at_50%_115%,rgba(217,72,31,0.7),transparent_70%)]" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#191813] via-[#191813]/45 to-[#191813]/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/45 to-[var(--ink)]/15" />
           <button
             onClick={onClose}
-            className="absolute right-5 top-5 z-10 rounded-full bg-white/10 p-2 text-[#F5F4F0] transition-colors hover:bg-white/20"
+            className="absolute right-5 top-5 z-10 rounded-full bg-white/10 p-2 text-[var(--canvas)] transition-colors hover:bg-white/20"
             aria-label="Close case study"
           >
             <X size={20} />
           </button>
 
           <div className="absolute bottom-6 left-6 right-6">
-            <span className="mb-3 inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.12em] text-[#D6D4CC]">
+            <span className="mb-3 inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.12em] text-[var(--secondary)]">
               {project.category}
             </span>
-            <h2 className="text-3xl font-semibold tracking-tight text-[#F5F4F0] md:text-4xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-[var(--canvas)] md:text-4xl">
               {project.title}
             </h2>
           </div>
         </div>
 
         <div className="custom-scrollbar flex-1 overflow-y-auto p-6 md:p-8">
-          <p className="mb-8 text-lg font-medium leading-8 text-[#191813]">{project.context}</p>
+          <p className="mb-8 text-lg font-medium leading-8 text-[var(--ink)]">{project.context}</p>
 
           <div className="mb-8 grid gap-5 md:grid-cols-2">
-            <div className="rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] p-5">
-              <div className="mb-4 flex items-center gap-3 text-[#D9481F]">
+            <div className="rounded-lg border border-[var(--hairline)] bg-[var(--surface)] p-5">
+              <div className="mb-4 flex items-center gap-3 text-[var(--accent)]">
                 <TrendingUp className="rotate-180" size={22} />
-                <h3 className="font-semibold text-[#191813]">The Challenge</h3>
+                <h3 className="font-semibold text-[var(--ink)]">The Challenge</h3>
               </div>
-              <p className="text-sm leading-6 text-[#55524A]">{project.challenge}</p>
+              <p className="text-sm leading-6 text-[var(--secondary)]">{project.challenge}</p>
             </div>
 
-            <div className="rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] p-5">
-              <div className="mb-4 flex items-center gap-3 text-[#D9481F]">
+            <div className="rounded-lg border border-[var(--hairline)] bg-[var(--surface)] p-5">
+              <div className="mb-4 flex items-center gap-3 text-[var(--accent)]">
                 <Zap size={22} />
-                <h3 className="font-semibold text-[#191813]">Our Solution</h3>
+                <h3 className="font-semibold text-[var(--ink)]">Our Solution</h3>
               </div>
-              <p className="text-sm leading-6 text-[#55524A]">{project.solution}</p>
+              <p className="text-sm leading-6 text-[var(--secondary)]">{project.solution}</p>
             </div>
           </div>
 
           <div className="mb-8">
-            <h4 className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-[#6E6B62]">
+            <h4 className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-[var(--secondary)]">
               Core Technologies
             </h4>
             <div className="flex flex-wrap gap-2">
               {project.tech.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full border border-[#DDDAD1] bg-[#FAF9F5] px-4 py-2 text-sm font-medium text-[#55524A]"
+                  className="rounded-full border border-[var(--hairline)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--secondary)]"
                 >
                   {tech}
                 </span>
@@ -90,28 +90,28 @@ const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
             </div>
           </div>
 
-          <div className="border-t border-[#DDDAD1] pt-7">
+          <div className="border-t border-[var(--hairline)] pt-7">
             <div className="flex items-start gap-4">
-              <div className="mt-1 rounded-full bg-[#191813] p-2 text-[#F5F4F0]">
+              <div className="mt-1 rounded-full bg-[var(--ink)] p-2 text-[var(--canvas)]">
                 <Shield size={22} />
               </div>
               <div>
-                <h3 className="mb-2 text-xl font-semibold tracking-tight text-[#191813]">
+                <h3 className="mb-2 text-xl font-semibold tracking-tight text-[var(--ink)]">
                   The Outcome
                 </h3>
-                <p className="leading-7 text-[#55524A]">{project.outcome}</p>
+                <p className="leading-7 text-[var(--secondary)]">{project.outcome}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-col gap-3 border-t border-[#DDDAD1] bg-[#EFEEE8] p-5 md:flex-row">
+        <div className="flex shrink-0 flex-col gap-3 border-t border-[var(--hairline)] bg-[var(--surface-tint)] p-5 md:flex-row">
           {liveSiteUrl && (
             <a
               href={liveSiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 rounded-xl border border-[#CFCBC0] bg-[#FAF9F5] py-4 text-center font-semibold text-[#191813] transition-colors hover:border-[#191813]"
+              className="flex-1 rounded-xl border border-[var(--control-border)] bg-[var(--surface)] py-4 text-center font-semibold text-[var(--ink)] transition-colors hover:border-[var(--ink)]"
             >
               <span className="inline-flex items-center justify-center gap-2">
                 Visit Live Site <ExternalLink size={18} />
@@ -120,7 +120,7 @@ const WorkModal: React.FC<WorkModalProps> = ({ isOpen, onClose, project }) => {
           )}
           <button
             onClick={onClose}
-            className="flex-1 rounded-xl border border-[#CFCBC0] bg-[#FAF9F5] py-4 font-semibold text-[#191813] transition-colors hover:border-[#191813]"
+            className="flex-1 rounded-xl border border-[var(--control-border)] bg-[var(--surface)] py-4 font-semibold text-[var(--ink)] transition-colors hover:border-[var(--ink)]"
           >
             Close Case Study
           </button>

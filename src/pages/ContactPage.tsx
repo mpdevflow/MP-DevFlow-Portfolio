@@ -1,66 +1,62 @@
 import SEO from '@/components/SEO';
-import CTA from '@/components/sections/CTA';
 import { CONTACT_EMAIL } from '@/constants';
-import { ArrowRight, Mail } from 'lucide-react';
-import React from 'react';
-
-interface ContactPageProps {
-  onOpenBooking: () => void;
-}
-
-const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
+export default function ContactPage({ onOpenBooking }: { onOpenBooking: () => void }) {
   return (
     <>
       <SEO
-        title="Contact - MPDevFlow"
-        description="Contact MPDevFlow to discuss landing pages, MVPs, SaaS apps, dashboards, internal tools, maintenance, or flexible build support."
+        title="Contact — MPDevFlow"
+        description="Bring your rough idea. Talk directly about scope, timing and the practical next step for your website or product."
         path="/contact"
       />
-      <section className="border-b border-[#DDDAD1] px-4 pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div>
-            <p className="mb-5 font-mono text-xs uppercase tracking-[0.16em] text-[#D9481F]">
-              Contact
-            </p>
-            <h1 className="max-w-4xl text-5xl font-semibold leading-none tracking-tight text-[#191813] md:text-7xl">
-              Send the rough version. We can shape the scope together.
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#55524A]">
-              You do not need a perfect brief, fixed budget, or final timeline to start the
-              conversation. Share what you know and MPDevFlow will help clarify the path.
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-[#DDDAD1] bg-[#FAF9F5] p-6">
-            <h2 className="mb-3 text-2xl font-semibold tracking-tight text-[#191813]">
-              Start with a project brief
-            </h2>
-            <p className="mb-6 leading-7 text-[#55524A]">
-              The form captures project type, current stage, timeline, budget comfort, and the
-              details that matter for the first reply.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                onClick={onOpenBooking}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#191813] px-6 py-3 text-sm font-semibold text-[#F5F4F0] transition-colors hover:bg-[#D9481F]"
-              >
-                Book a Free Call
-                <ArrowRight size={17} />
-              </button>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#CFCBC0] px-6 py-3 text-sm font-semibold text-[#191813] transition-colors hover:border-[#191813]"
-              >
-                <Mail size={17} />
-                Email Directly
-              </a>
-            </div>
+      <section className="page-intro">
+        <div className="chapter">
+          <span>Contact</span>
+          <i />
+          <span>Start with a conversation</span>
+        </div>
+        <h1>
+          Send the rough version.
+          <br />
+          <em>
+            We’ll find the shape<span className="accent">.</span>
+          </em>
+        </h1>
+        <p className="lead">
+          A few notes, a problem you keep running into, or a product that needs a better next
+          chapter. That’s enough to start.
+        </p>
+      </section>
+      <section className="contact-layout journal-section">
+        <div>
+          <h2>
+            Let’s talk
+            <br />
+            <em>through the work.</em>
+          </h2>
+          <p>
+            We’ll discuss your goals, constraints and what a useful first step looks like. A free
+            project call, with room for questions.
+          </p>
+          <div className="contact-actions">
+            <button className="button" onClick={onOpenBooking}>
+              Book a project call
+            </button>
+            <a className="text-link" href={`mailto:${CONTACT_EMAIL}`}>
+              Email directly <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
+        <aside className="contact-note">
+          <p className="eyebrow">Helpful to bring</p>
+          <ol>
+            <li>What you’re trying to build or improve</li>
+            <li>Who it needs to work for</li>
+            <li>Any timing or budget constraints</li>
+            <li>Links, sketches or an existing product</li>
+          </ol>
+          <p>Not sure yet? We can work through it together.</p>
+        </aside>
       </section>
-      <CTA onOpenBooking={onOpenBooking} />
     </>
   );
-};
-
-export default ContactPage;
+}
