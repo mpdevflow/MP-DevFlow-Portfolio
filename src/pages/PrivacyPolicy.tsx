@@ -6,11 +6,7 @@ import React from 'react';
 const PrivacyPolicy: React.FC = () => {
   return (
     <LegalLayout title="Privacy Policy">
-      <SEO
-        title="Privacy Policy - MPDevFlow"
-        description="Read the MPDevFlow privacy policy for how project inquiries, booking details, and communication data are handled."
-        path="/privacy"
-      />
+      <SEO path="/privacy" />
       <p className="mb-12 border-l-4 border-[var(--accent)] pl-6 text-xl leading-8 text-[var(--secondary)] italic">
         At MPDevFlow, we believe in <strong className="text-[var(--ink)]">transparency</strong> and{' '}
         <strong className="text-[var(--ink)]">honest direction</strong>. We treat your privacy with

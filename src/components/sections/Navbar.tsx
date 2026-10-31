@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import Brand from '@/components/Brand';
 export default function Navbar({ onOpenBooking }: { onOpenBooking: () => void }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -16,9 +17,7 @@ export default function Navbar({ onOpenBooking }: { onOpenBooking: () => void })
   );
   return (
     <header className="site-header">
-      <Link to="/" className="wordmark" aria-label="MPDevFlow home">
-        MPDevFlow
-      </Link>
+      <Brand />
       <nav aria-label="Main navigation" className="desktop-nav">
         {links}
         <button className="button" onClick={onOpenBooking}>

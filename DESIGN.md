@@ -121,3 +121,13 @@ Review rendered screenshots at 375, 768 and 1440px; inspect every route. Verify 
 ## Approved detail refinements
 
 Text links use one continuous rule across label, gap and arrow. Dialog close buttons are 44px squares with a full radius and a centered icon. Brief / Delivered uses 32px visible segments with a 44px expanded hit area; its surrounding frame is 42px tall. All six numbered homepage sections share the same outer spacing: 80px desktop/tablet and 32px mobile. The hero has no extra horizontal inset.
+
+## Approved favicon
+
+Use the linked MP monogram selected by the user: M and P share a stem, with cream lettering and a burnt-orange P bowl on a charcoal rounded square. The favicon uses custom vector outlines with no font dependency. Pair the approved MP mark with the visible text “DevFlow” in both header and footer, so the monogram supplies the MP prefix; use a 32px mark, 8px gap and at least a 44px link target. The combined lockup keeps “MPDevFlow home” as its accessible name, with the mark treated as decorative beside the text. Preserve MPDevFlow as the full name in SEO and structured data.
+
+## Approved brand and SEO rollout — 2026-10-31
+
+Use the linked MP mark across favicon, shared header/footer lockups, the 512px Organization logo, the 180px Apple touch icon, and the 1200×630 social share image. The share card continues the cream/charcoal/orange editorial system with the approved sans/serif headline, hairline rules, existing studio claim and URL; no invented outcome or badge. Its source uses an 8px spacing rhythm at export dimensions.
+
+The shared page catalog supplies build-time metadata and client navigation updates. Every public route gets its own title, description, canonical URL, social tags and structured data before JavaScript runs. Generate the sitemap from the same catalog, including Serbisyo Barangay and DinkOS. Do not invent modification dates or social profiles. This is metadata generation, not server rendering of React page content.

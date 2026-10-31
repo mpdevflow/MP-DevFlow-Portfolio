@@ -9,7 +9,7 @@ A high-performance, product-centric digital agency portfolio designed for speed,
 - **Modern Design System**: Custom Tailwind CSS configuration with local asset management, ensuring no dependency on external CDNs.
 - **Interactive UI**: Smooth scroll mechanics, responsive layouts, and polished micro-interactions using standard CSS and optimized React hooks.
 - **Robust Form Handling**: Integrated `Zod` schema validation with `React Hook Form` for secure, error-free user input.
-- **SEO Optimization**: Dynamic meta-tag management using `react-helmet-async` for improved search engine visibility.
+- **SEO Optimization**: Shared page metadata is written into production HTML at build time, with matching updates during client-side navigation.
 
 ## Engineering Standards
 
@@ -30,7 +30,7 @@ This project adheres to strict quality assurance protocols ensures long-term mai
 - **Styling**: Tailwind CSS, PostCSS
 - **Testing**: Vitest, React Testing Library
 - **Validation**: Zod, React Hook Form
-- **SEO**: React Helmet Async
+- **SEO**: Shared route catalog, static page metadata, sitemap generation and Organization logo data
 - **Tooling**: ESLint, Prettier, Husky, lint-staged
 
 ## Getting Started
@@ -63,3 +63,12 @@ This project adheres to strict quality assurance protocols ensures long-term mai
 ---
 
 © 2025 MP DevFlow. Built for performance.
+
+## Brand and SEO maintenance
+
+- `public/assets/mpdevflow-mark.svg` is the approved linked MP mark used beside the wordmark in the header and footer. The matching browser icon is `public/favicon.svg`; the PNG logo and Apple touch icon are exported at 512px and 180px.
+- `design/brand-share.html` is the editable 1200×630 social-card source. Render it with its fonts loaded to update `public/assets/mpdevflow-share.png`. The new filename refreshes existing social image caches without removing the legacy image asset.
+- `src/data/seo.ts` owns titles, descriptions, canonical paths, social metadata and structured data. Project routes follow `src/data/projects.ts`; give new projects a concise description in the SEO catalog.
+- `scripts/seo-html.ts` generates per-page HTML and `sitemap.xml` during `pnpm build`. It also provides matching metadata and the sitemap during development.
+- Deploy the complete `dist/` directory. Preserve the emitted `.html` and directory-index files; configure the host to serve existing page files before any SPA fallback. The app still renders page content in React; the metadata and structured data are available without JavaScript.
+- `pnpm test --run` checks metadata escaping, canonical URLs, project/sitemap coverage, static-host output forms and existing inquiry behavior.

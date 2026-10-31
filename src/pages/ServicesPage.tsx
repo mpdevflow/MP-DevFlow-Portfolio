@@ -5,11 +5,7 @@ import { serviceGroups } from '@/components/sections/BentoGrid';
 export default function ServicesPage({ onOpenBooking }: { onOpenBooking: () => void }) {
   return (
     <>
-      <SEO
-        title="Services — MPDevFlow"
-        description="Senior-led websites, MVPs, web apps, internal tools and ongoing development support from the Philippines."
-        path="/services"
-      />
+      <SEO path="/services" />
       <section className="page-intro">
         <div className="chapter">
           <span>Services</span>

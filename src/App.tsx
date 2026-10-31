@@ -22,11 +22,7 @@ const HomePage: React.FC = () => {
     <MarketingLayout>
       {(openBooking) => (
         <>
-          <SEO
-            title="MPDevFlow — Senior-led Web & Product Studio"
-            description="MPDevFlow helps startups, agencies, and growing businesses build landing pages, MVPs, SaaS apps, dashboards, and internal tools with senior-led delivery from the Philippines."
-            path="/"
-          />
+          <SEO path="/" />
           <Hero onOpenBooking={openBooking} />
           <Work />
           <BentoGrid />
@@ -43,32 +39,6 @@ const HomePage: React.FC = () => {
 const App: React.FC = () => {
   return (
     <div className="app-root">
-      <script type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'ProfessionalService',
-          name: 'MPDevFlow',
-          description:
-            'Web and product development studio for landing pages, MVPs, SaaS apps, dashboards, and internal tools.',
-          url: 'https://mpdevflow.com',
-          email: 'hello@mpdevflow.com',
-          image: 'https://mpdevflow.com/assets/seo_og_share.png',
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: 'Quezon City',
-            addressCountry: 'PH',
-          },
-          serviceType: [
-            'Landing Page Development',
-            'MVP Development',
-            'SaaS App Development',
-            'Dashboard Development',
-            'Internal Tool Development',
-          ],
-          areaServed: 'Worldwide',
-        })}
-      </script>
-
       <ScrollToTop />
 
       <Routes>

@@ -14,12 +14,7 @@ export default function ProjectCaseStudyPage({ title }: { title: string }) {
     <MarketingLayout>
       {(openBooking) => (
         <>
-          <SEO
-            title={`${title} — Project journal — MPDevFlow`}
-            description={project.description}
-            path={project.caseStudyPath}
-            type="article"
-          />
+          <SEO path={project.caseStudyPath} />
           <section className="page-intro case-intro">
             <Link className="text-link back-link" to="/#work">
               ← Back to work

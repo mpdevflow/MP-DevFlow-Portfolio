@@ -3,11 +3,7 @@ import { CONTACT_EMAIL } from '@/constants';
 export default function ContactPage({ onOpenBooking }: { onOpenBooking: () => void }) {
   return (
     <>
-      <SEO
-        title="Contact — MPDevFlow"
-        description="Bring your rough idea. Talk directly about scope, timing and the practical next step for your website or product."
-        path="/contact"
-      />
+      <SEO path="/contact" />
       <section className="page-intro">
         <div className="chapter">
           <span>Contact</span>
